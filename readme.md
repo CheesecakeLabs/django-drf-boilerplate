@@ -1,6 +1,8 @@
 ![Cheesecake](https://raw.githubusercontent.com/jonatasbaldin/cake/master/img/logo.png)
 
 # django-drf-boilerplate
+Boilerplate project using Django and Django REST Framework.  
+Currently supporting only Python 3.x.
 
 ## How to install
 
