@@ -25,3 +25,6 @@ $ django-admin.py startproject \
   <project_name> .
 $ docker-compose up
 ```
+
+## Database
+Running database on latest PostgreSQL Docker container running in the port `5432`. The connection is defined by the `dj-database-url` package. There's a race condition script to avoid running Django before the database goes up.
