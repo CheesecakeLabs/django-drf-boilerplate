@@ -123,4 +123,4 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 # Third-part services
-DATABASES['default'] = dj_database_url.parse('postgres://postgres:postgres@localhost:5432/postgres')
+DATABASES['default'] = dj_database_url.parse('postgres://postgres:postgres@db:5432/postgres')
