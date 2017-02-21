@@ -4,6 +4,7 @@
 Boilerplate project using Django and Django REST Framework.  
 Currently supporting only Python 3.x.
 
+**IMPORTANT**:
 Make sure you have Django 1.10 installed on your environment.
 
 ## How to install
@@ -14,4 +15,13 @@ $ django-admin.py startproject \
   <project_name> .
 $ pip install -r requirements.txt
 $ python <project_name>/manage.py runserver
+```
+
+## How to install with Docker Compose
+
+```bash
+$ django-admin.py startproject \
+  --template=https://github.com/CheesecakeLabs/django-drf-boilerplate/archive/master.zip \
+  <project_name> .
+$ docker-compose up
 ```
