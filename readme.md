@@ -5,7 +5,8 @@ Boilerplate project using Django and Django REST Framework.
 Currently supporting only Python 3.x.
 
 **IMPORTANT**:
-Make sure you have Django 1.10 installed on your environment.
+Make sure you have Django 1.10 installed on your environment.  
+Docker Compose is used *just* for development environment. The Dockerfile works without it.
 
 ## How to install
 

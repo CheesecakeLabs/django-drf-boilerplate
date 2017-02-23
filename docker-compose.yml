@@ -2,13 +2,12 @@ version: '2'
 services:
   web:
     build: .
-    command: bash -c "python docker/web/check_db.py --service-name Postgres --ip db --port 5432 &&
-                      python manage.py migrate && 
-                      python manage.py runserver 0.0.0.0:8000"
     volumes:
-      - ".:/code"
+      - ".:/usr/src/app"
     ports:
       - "8000:8000"
+    environment:
+      ENV: "development"
 
   db:
     image: postgres:latest
