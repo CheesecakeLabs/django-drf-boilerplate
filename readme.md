@@ -16,7 +16,9 @@ $ pip install -r requirements.txt
 $ python <project_name>/manage.py runserver
 ```
 
-# Copy pre-commit hook to git hooks and give it execute permission
+## Copy pre-commit hook to git hooks and give it execute permission
 ```bash
-$ touch .git/hooks/pre-commit && cp pre-commit.py .git/hooks/pre-commit && chmod -x .git/hooks/pre-commit
+$ git init
+$ cp pre-commit.py .git/hooks/pre-commit
+$ chmod 701 .git/hooks/pre-commit
 ```
