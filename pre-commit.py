@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Pre-commit hook that checks errors with pyflakes.
+Pre-commit hook that checks errors with flake8.
 Adapted from: https://github.com/cbrueffer/pep8-git-hook
 """
 import os
@@ -9,6 +9,10 @@ import shutil
 import subprocess
 import sys
 import tempfile
+
+# Ignore list:
+# E501: 79-char per line limit
+IGNORE_LIST = ['E501']
 
 
 def system(*args, **kwargs):
@@ -63,21 +67,28 @@ def main():
     files = find_modified_and_added_py_files()
     verify_dir = create_temp_dir_staged(files)
 
-    # Run pyflakes on this directory
-    out, err, code = system('python', '-mpyflakes', verify_dir)
+    # Build ignore list string and run flake8 on this directory
+    ignore_violations = ','.join(IGNORE_LIST)
+    out, err, code = system(
+        'python',
+        '-mflake8',
+        '--ignore',
+        ignore_violations,
+        verify_dir
+    )
 
     # Remove temporary directory
     shutil.rmtree(verify_dir)
 
-    # If pyflakes complains, show violations and exit with error
+    # If flake8 complains, show violations and exit with error
     if out:
-        print("""Pyflakes violations have been detected. Please fix them or
+        print("""Flake8 violations have been detected. Please fix them or
               force the commit with "git commit --no-verify".\n""")
         # Clean temporary directory name from output and display
         print(out.decode('utf-8').replace(verify_dir, ''))
         sys.exit(1)
 
-    # If no output complains, but there was an error on pyflakes command, exit
+    # If no output complains, but there was an error on flake8 command, exit
     # with error anyway
     if code != 0:
         sys.exit(1)
