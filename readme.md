@@ -15,3 +15,18 @@ $ django-admin.py startproject \
 $ pip install -r requirements.txt
 $ python <project_name>/manage.py runserver
 ```
+
+## Install git pre-commit hook
+Check code syntax and style before commit changes.
+
+After initializing git, add flake8 hook.
+```bash
+$ git init
+$ python -m flake8 --install-hook git
+```
+
+Set flake8 strict parameter to true, this forces all violations to be fixed
+before the commit.
+```bash
+$ git config --bool flake8.strict true
+```
