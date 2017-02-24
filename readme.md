@@ -16,9 +16,17 @@ $ pip install -r requirements.txt
 $ python <project_name>/manage.py runserver
 ```
 
-## Copy pre-commit hook to git hooks and give it execute permission
+## Install git pre-commit hook
+Check code syntax and style before commit changes.
+
+After initializing git, add flake8 hook.
 ```bash
 $ git init
-$ cp pre-commit.py .git/hooks/pre-commit
-$ chmod 701 .git/hooks/pre-commit
+$ python -m flake8 --install-hook git
+```
+
+Set flake8 strict parameter to true, this forces all violations to be fixed
+before the commit.
+```bash
+$ git config --bool flake8.strict true
 ```
