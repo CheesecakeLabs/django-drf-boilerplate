@@ -88,5 +88,5 @@ ENV/
 # Rope project settings
 .ropeproject
 
-# Jetbrains project files
-.idea/
+# Database data
+docker/db/pgdata/
