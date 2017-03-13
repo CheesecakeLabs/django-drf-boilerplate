@@ -1,10 +1,10 @@
-![Cheesecake](https://raw.githubusercontent.com/jonatasbaldin/cake/master/img/logo.png)
+<img src="https://s3-us-west-2.amazonaws.com/ckl-generic-hosting/cheesecake-logo-blue.png" height="60">
 
 # django-drf-boilerplate
 Boilerplate project using Django and Django REST Framework.
 Currently supporting only Python 3.x.
 
-**IMPORTANT**:
+**IMPORTANT**:  
 Make sure you have Django 1.10 installed on your environment.  
 Docker Compose is used *just* for development environment. The Dockerfile works without it.
 
