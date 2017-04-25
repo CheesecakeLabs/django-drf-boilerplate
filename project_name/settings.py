@@ -11,20 +11,30 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 """
 
 import os
+from os.path import dirname, join, exists, abspath
 
-import dj_database_url
+import environ  
+
+# Load operating system env variables and prepare to use them
+env = environ.Env()
+
+# .env file, should load only in development environment
+env_file = join(dirname(__file__), 'local.env')
+if exists(env_file):
+    environ.Env.read_env(str(env_file))
+
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASE_DIR = dirname(dirname(abspath(__file__)))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '8#ubdv*jh_1u(6m4)^s^*pdo!&y_#jz)vv%5cp%8^*&%ztttxq'
+SECRET_KEY = env('DJANGO_SECRET_KEY', default='8#ubdv*jh_1u(6m4)^s^*pdo!&y_#jz)vv%5cp%8^*&%ztttxq')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env.bool('DJANGO_DEBUG', False)
 
 ALLOWED_HOSTS = []
 
@@ -88,7 +98,7 @@ WSGI_APPLICATION = '{{ project_name }}.wsgi.application'
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
 
 DATABASES = {
-    'default': dj_database_url.parse('postgres://postgres:postgres@db:5432/postgres')
+    'default': env.db(),
 }
 
 # Password validation
