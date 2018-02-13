@@ -1,11 +1,12 @@
-from django.conf.urls import url, include
 from django.contrib import admin
+from django.urls import include, path
+
 
 urlpatterns = [
-    url(r'^admin/', admin.site.urls),
+    path(r'^admin/', admin.site.urls),
 
     # Enables the DRF browsable API page
-    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    path(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 
-    url(r'', include('cklauth.urls')),
+    path(r'', include('cklauth.urls', namespace='cklauth')),
 ]
