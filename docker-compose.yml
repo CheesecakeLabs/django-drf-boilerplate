@@ -1,19 +1,19 @@
-version: '2'
+version: '3'
 services:
   web:
     build: .
     volumes:
-      - ".:/usr/src/app"
+      - .:/usr/src/app
     ports:
-      - "8000:8000"
-    environment:
-      ENV: "development"
+      - 8000:8000
 
   db:
-    image: postgres:latest
+    image: postgres:9.6.6
     ports:
-      - "5432:5432"
+      - 5432:5432
     volumes:
-      - "./docker/db/pgdata:/var/lib/postgresql/data"
+      - ./docker/db/pgdata:/var/lib/postgresql/data
     environment:
-      POSTGRES_PASSWORD: "postgres"
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: app
