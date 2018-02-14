@@ -3,6 +3,10 @@ from allauth.account import views
 from allauth.socialaccount import views as social_views
 from django.conf import settings
 
+
+app_name = 'cklauth'
+
+
 urlpatterns = [
     # Auth API endpoints
     url(r'^api/v1/', include('cklauth.api.v1.urls')),
