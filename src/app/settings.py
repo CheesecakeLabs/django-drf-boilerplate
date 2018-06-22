@@ -34,6 +34,8 @@ DJANGO_APPS = [
     'django.contrib.staticfiles',
 ]
 
+SITE_ID = 1
+
 THIRD_PARTY_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
@@ -49,6 +51,7 @@ THIRD_PARTY_APPS = [
 
 PROJECT_APPS = [
     'cklauth',
+    'payments',
 ]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + PROJECT_APPS
