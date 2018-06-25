@@ -47,11 +47,12 @@ THIRD_PARTY_APPS = [
 
     'rest_auth',
     'rest_auth.registration',
+    'test_without_migrations',
 ]
 
 PROJECT_APPS = [
     'cklauth',
-    'payments',
+    'billings',
 ]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + PROJECT_APPS
@@ -92,6 +93,11 @@ WSGI_APPLICATION = 'app.wsgi.application'
 DATABASES = {
     'default': env.db(),
 }
+
+# Stripe Confid
+
+STRIPE_SECRET_KEY = env('STRIPE_SECRET_KEY')
+STRIPE_PUBLISHABLE_KEY = env('STRIPE_PUBLISHABLE_KEY')
 
 # Password validation
 
