@@ -22,6 +22,9 @@ class BillingProfile(models.Model):
     def get_cards(self):
         return self.card_set.all()
 
+    def charge(self, amount, order_id, currency, card=None):
+        return Charge.objects.do(self, amount, order_id, currency, card)
+
 
 def billing_profile_created_receiver(sender, instance, *args, **kwargs):
     if not instance.customer_id and instance.email:
@@ -92,3 +95,70 @@ def new_card_post_save_receiver(sender, instance, created, *args, **kwargs):
 
 
 post_save.connect(new_card_post_save_receiver, sender=Card)
+
+
+class ChargeManager(models.Manager):
+    def do(self, billing_profile, amount, order_id, currency, card=None):
+        card_obj = card
+        if card_obj is None:
+            cards = billing_profile.card_set.filter(default=True)
+            if cards.exists():
+                card_obj = cards.first()
+        if card_obj is None:
+            return False, "No, cards available"
+
+        c = stripe.Charge.create(
+            amount=amount,
+            currency=currency,
+            customer=billing_profile.customer_id,
+            source=card_obj,
+            metadata={"order_id": order_id},
+        )
+        new_charge_obj = self.model(
+            billing_profile=billing_profile,
+            stripe_id=c.id,
+            currency=currency,
+            source=card_obj,
+            captured=c.captured,
+            paid=c.paid,
+            amount=c.amount,
+            refunded=c.refunded,
+            amount_refunded=c.amount_refunded,
+            outcome=c.outcome,
+            outcome_type=c.outcome['type'],
+            seller_message=c.outcome.get('seller_message'),
+            risk_level=c.outcome.get('risk_level'),
+            order_id=order_id,
+            failure_code=c.failure_code,
+            failure_message=c.failure_message,
+        )
+        new_charge_obj.save()
+        return new_charge_obj.paid, new_charge_obj.seller_message
+
+
+class Charge(models.Model):
+    billing_profile = models.ForeignKey(BillingProfile, on_delete=models.CASCADE)
+    stripe_id = models.CharField(max_length=120)
+
+    currency = models.CharField(max_length=3)
+    source = models.CharField(max_length=120)
+
+    captured = models.CharField(max_length=120, null=True, blank=True)
+    paid = models.BooleanField(default=False)
+    amount = models.IntegerField(null=True, blank=True)
+    refunded = models.BooleanField(default=False)
+    amount_refunded = models.IntegerField(null=True, blank=True)
+
+    outcome = models.TextField(null=True, blank=True)
+    outcome_type = models.CharField(max_length=120, null=True, blank=True)
+    seller_message = models.CharField(max_length=120, null=True, blank=True)
+    risk_level = models.CharField(max_length=120, null=True, blank=True)
+
+    order_id = models.CharField(max_length=120, null=True, blank=True)
+
+    failure_code = models.CharField(max_length=120, null=True, blank=True)
+    failure_message = models.CharField(max_length=120, null=True, blank=True)
+
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    objects = ChargeManager()
