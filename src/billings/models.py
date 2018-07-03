@@ -51,6 +51,7 @@ class CardManager(models.Manager):
 
     def add_new(self, billing_profile, token):
         if token:
+            billing_profile = BillingProfile.objects.get(pk=billing_profile)
             card = create_card(billing_profile.customer_id, token)
             new_card = self.model(
                 billing_profile=billing_profile,
@@ -102,7 +103,9 @@ post_save.connect(new_card_post_save_receiver, sender=Card)
 
 class ChargeManager(models.Manager):
     def do(self, billing_profile, amount, order_id, currency, card=None):
-        card_obj = card
+        card_obj = Card.objects.get(pk=card)
+        billing_profile = BillingProfile.objects.get(pk=billing_profile)
+
         if card_obj is None:
             cards = billing_profile.card_set.filter(default=True)
             if cards.exists():

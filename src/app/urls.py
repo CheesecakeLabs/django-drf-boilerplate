@@ -9,4 +9,5 @@ urlpatterns = [
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 
     path('', include('cklauth.urls', namespace='cklauth')),
+    path('', include('billings.urls', namespace='billings')),
 ]
