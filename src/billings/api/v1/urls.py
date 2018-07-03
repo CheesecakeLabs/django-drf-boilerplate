@@ -17,8 +17,12 @@ urlpatterns = [
     url(r'^profile/$', BillingProfileListAPIView.as_view(), name='billing_profile'),
     url(r'^profile/create/$', BillingProfileCreateAPIView.as_view(), name='billing_profile_create'),
     url(r'^profile/(?P<pk>\d+)/$', BillingProfileDetailAPIView.as_view(), name='billing_profile_detail'),
+    url(r'^profile/(?P<pk>\d+)/charges/$', ChargeListView.as_view(), name='billing_profile_detail'),
+
     url(r'^cards/$', CardListAPIView.as_view(), name='cards_list'),
     url(r'^cards/create/$', CardCreateView.as_view(), name='cards_create'),
     url(r'^cards/(?P<pk>\d+)/$', CardDetailAPIView.as_view(), name='cards_detail'),
+
+    url(r'^charge/$', ChargeCreateView.as_view(), name='charge_create'),
 
 ]

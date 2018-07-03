@@ -1,6 +1,6 @@
 from rest_framework.generics import CreateAPIView, ListAPIView, RetrieveAPIView
-from .serializers import BillingProfileSerializer, CardSerializer, CardCreateSerializer
-from billings.models import BillingProfile
+from .serializers import BillingProfileSerializer, CardSerializer, CardCreateSerializer, ChargeCreateSerializer, ChargeSerializer
+from billings.models import BillingProfile, Card, Charge
 
 
 class BillingProfileListAPIView(ListAPIView):
@@ -44,3 +44,13 @@ class CardCreateView(CreateAPIView):
 #             return Response({"stripe_id": card.stripe_id, "id": card.pk}, status=status.HTTP_201_CREATED)
 #         except Exception as e:
 #             return Response(e.error, status=status.HTTP_400_BAD_REQUEST)
+
+
+class ChargeCreateView(CreateAPIView):
+    queryset = Charge.objects.all()
+    serializer_class = ChargeCreateSerializer
+
+
+class ChargeListView(ListAPIView):
+    queryset = Card.objects.all()
+    serializer_class = ChargeSerializer
