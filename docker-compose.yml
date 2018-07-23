@@ -6,6 +6,8 @@ services:
       - .:/usr/src/app
     ports:
       - 8000:8000
+    environment:
+      ENV: development
 
   db:
     image: postgres:9.6.6
