@@ -1,6 +1,2 @@
 [flake8]
-ignore =
-  # Ignore line limit of 79 characters
-  # Our motivation is that not everyone enjoys this limit. 
-  # Just use common sense and keep it around 100-120 
-  E501
+max-line-length = 120
