@@ -91,3 +91,6 @@ ENV/
 
 # Database data
 docker/db/pgdata/
+
+# Static Files
+static/

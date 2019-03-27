@@ -10,8 +10,10 @@ django-environ = "*"
 django-allauth = "*"
 django-rest-auth = "*"
 "psycopg2" = "*"
+whitenoise = "*"
 
 [dev-packages]
+gunicorn = "*"
 
 [requires]
 python_version = "3.6"
