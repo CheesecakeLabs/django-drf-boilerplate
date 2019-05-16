@@ -1,6 +1,10 @@
 #!/bin/bash
 set -e
 
+if [ "$ENV" = "development" ] || [ "$ENV" = "staging" ] ; then
+    pipenv install --dev --system
+fi
+
 if [ "$1" = "manage" ]; then
     shift 1
     exec python src/manage.py "$@"
@@ -11,7 +15,7 @@ else
     python src/manage.py collectstatic --noinput  # Collect static files
 
     # Prepare log files and start outputting logs to stdout
-    mkdir /srv/logs/
+    mkdir -p /srv/logs/
     touch /srv/logs/gunicorn.log
     touch /srv/logs/access.log
     tail -n 0 -f /srv/logs/*.log &
