@@ -1,20 +1,22 @@
 <img src="https://s3-us-west-2.amazonaws.com/ckl-generic-hosting/cheesecake-logo-blue.png" height="60">
 
-# django-drf-boilerplate
+# Django DRF Boilerplate
 Boilerplate project using Django and Django REST Framework.
 Currently supporting only Python 3.x.
 
 **IMPORTANT**:
-Make sure you have Django 2.0 installed on your environment.
 Docker Compose is used *just* for development environment. The Dockerfile works without it.
 
-## How to install
+## How to install with Pyenv
 
 ```bash
+$ pyenv virtualenv 3.7.3 <project_name>
+$ pyenv activate <project_name>
+$ pip install Django==2.2.2
 $ django-admin.py startproject \
   --template=https://github.com/CheesecakeLabs/django-drf-boilerplate/archive/master.zip \
   <project_name> .
-$ pip install -r requirements.txt
+$ pip install -r requirements/dev.txt
 $ python src/manage.py runserver
 ```
 
