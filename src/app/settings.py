@@ -39,15 +39,11 @@ DJANGO_APPS = [
 THIRD_PARTY_APPS = [
     "rest_framework",
     "rest_framework.authtoken",
-    "allauth",
-    "allauth.account",
-    "allauth.socialaccount",
-    "allauth.socialaccount.providers.facebook",
-    "rest_auth",
-    "rest_auth.registration",
+    "corsheaders",
+    "cklauth",
 ]
 
-PROJECT_APPS = ["cklauth"]
+PROJECT_APPS = []
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + PROJECT_APPS
 
@@ -144,49 +140,13 @@ REST_FRAMEWORK = {
     ],
 }
 
-# CKLAuth settings (allauth + restauth)
-# Authentication
+# CKL Auth
 
-AUTHENTICATION_BACKENDS = (
-    "django.contrib.auth.backends.ModelBackend",
-    "allauth.account.auth_backends.AuthenticationBackend",
-)
+AUTHENTICATION_BACKENDS = ("cklauth.auth.EmailOrUsernameModelBackend",)
 
-# allauth
-# http://django-allauth.readthedocs.io/en/latest/configuration.html
-# This configuration uses email as login parameter instead of username
-
-ACCOUNT_EMAIL_REQUIRED = True
-ACCOUNT_USERNAME_REQUIRED = False
-ACCOUNT_AUTHENTICATION_METHOD = "email"
-ACCOUNT_EMAIL_VERIFICATION = False
-
-LOGIN_REDIRECT_URL = "/"
-LOGIN_URL = "/auth/login/"
-
-# allauth social providers
-
-SOCIALACCOUNT_PROVIDERS = {
-    "facebook": {
-        "METHOD": "oauth2",
-        "SCOPE": ["email", "public_profile", "user_friends"],
-        "AUTH_PARAMS": {"auth_type": "reauthenticate"},
-        "FIELDS": [
-            "id",
-            "email",
-            "name",
-            "first_name",
-            "last_name",
-            "verified",
-            "locale",
-            "timezone",
-            "link",
-            "gender",
-            "updated_time",
-        ],
-        "EXCHANGE_TOKEN": True,
-        "LOCALE_FUNC": lambda request: "en_US",
-        "VERIFIED_EMAIL": False,
-        "VERSION": "v2.4",
-    }
+CKL_REST_AUTH = {
+    # Config: https://github.com/CheesecakeLabs/ckl-rest-auth#installation
+    "LOGIN_FIELD": "email",
+    "USER_SERIALIZER": "cklauth.api.v1.serializers.UserSerializer",
+    "REGISTER_FIELDS": ("email",),
 }
