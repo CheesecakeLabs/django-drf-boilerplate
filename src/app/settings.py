@@ -43,7 +43,7 @@ THIRD_PARTY_APPS = [
     "cklauth",
 ]
 
-PROJECT_APPS = []
+PROJECT_APPS = ["users"]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + PROJECT_APPS
 
@@ -141,6 +141,8 @@ REST_FRAMEWORK = {
 }
 
 # CKL Auth
+
+AUTH_USER_MODEL = "users.User"
 
 AUTHENTICATION_BACKENDS = ("cklauth.auth.EmailOrUsernameModelBackend",)
 
