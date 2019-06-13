@@ -1,13 +1,15 @@
 import socket
 import time
 import argparse
+
 """ Check if port is open, avoid docker-compose race condition """
 
-parser = argparse.ArgumentParser(description='Check if port is open, avoid\
-                                 docker-compose race condition')
-parser.add_argument('--service-name', required=True)
-parser.add_argument('--ip', required=True)
-parser.add_argument('--port', required=True)
+parser = argparse.ArgumentParser(
+    description="Check if port is open, avoid docker-compose race condition"
+)
+parser.add_argument("--service-name", required=True)
+parser.add_argument("--ip", required=True)
+parser.add_argument("--port", required=True)
 
 args = parser.parse_args()
 

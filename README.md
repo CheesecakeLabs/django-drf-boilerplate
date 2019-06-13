@@ -29,19 +29,12 @@ $ django-admin.py startproject \
 $ docker-compose up
 ```
 
-## Install git pre-commit hook
-Check code syntax and style before commit changes.
+## Install Black code formatter to your editor
+Check code syntax and style before committing changes.
 
-After initializing git, add flake8 hook.
+Or run it manually:
 ```bash
-$ git init
-$ python -m flake8 --install-hook git
-```
-
-Set flake8 strict parameter to true, this forces all violations to be fixed
-before the commit.
-```bash
-$ git config --bool flake8.strict true
+$ black .
 ```
 
 ## Database
