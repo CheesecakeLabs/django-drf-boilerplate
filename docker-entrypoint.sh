@@ -1,16 +1,14 @@
 #!/bin/bash
 set -e
 
-if [ "$ENV" = "development" ] || [ "$ENV" = "staging" ] ; then
-    pipenv install --dev --system
+if [ "$ENV" = "development" ] ; then
+    python docker/web/check_db.py --service-name postgres --ip db --port 5432
 fi
 
 if [ "$1" = "manage" ]; then
     shift 1
     exec python src/manage.py "$@"
 else
-    python docker/web/check_db.py --service-name Postgres --ip db --port 5432
-
     python src/manage.py migrate                  # Apply database migrations
     python src/manage.py collectstatic --noinput  # Collect static files
 
