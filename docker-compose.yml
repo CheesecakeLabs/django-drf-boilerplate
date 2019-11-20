@@ -1,4 +1,4 @@
-version: '3'
+version: "3"
 services:
   web:
     build: .
@@ -10,7 +10,7 @@ services:
       ENV: development
 
   db:
-    image: postgres:11
+    image: postgres:12
     ports:
       - 5432:5432
     volumes:
