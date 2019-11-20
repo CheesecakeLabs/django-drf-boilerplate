@@ -1,14 +1,8 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as DjangoUserAdmin
 
-from cklauth.models import SocialAccount
-
 from .forms import UserCreationForm, UserChangeForm
 from .models import User
-
-
-class SocialAccountInline(admin.StackedInline):
-    model = SocialAccount
 
 
 class UserAdmin(DjangoUserAdmin):
@@ -37,8 +31,6 @@ class UserAdmin(DjangoUserAdmin):
     search_fields = ("email", "first_name", "last_name")
     ordering = ("email",)
     filter_horizontal = ()
-    inlines = (SocialAccountInline,)
 
 
 admin.site.register(User, UserAdmin)
-admin.site.unregister(SocialAccount)
