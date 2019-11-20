@@ -40,7 +40,6 @@ THIRD_PARTY_APPS = [
     "rest_framework",
     "rest_framework.authtoken",
     "corsheaders",
-    "cklauth",
 ]
 
 PROJECT_APPS = ["users"]
@@ -140,15 +139,7 @@ REST_FRAMEWORK = {
     ],
 }
 
-# CKL Auth
+# Auth
 
 AUTH_USER_MODEL = "users.User"
 
-AUTHENTICATION_BACKENDS = ("cklauth.auth.EmailOrUsernameModelBackend",)
-
-CKL_REST_AUTH = {
-    # Config: https://github.com/CheesecakeLabs/ckl-rest-auth#installation
-    "LOGIN_FIELD": "email",
-    "USER_SERIALIZER": "cklauth.api.v1.serializers.UserSerializer",
-    "REGISTER_FIELDS": ("email",),
-}
