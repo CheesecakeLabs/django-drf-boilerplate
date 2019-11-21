@@ -1,0 +1,12 @@
+exclude_patterns:
+  - "**/migrations/*.py"
+  - "**/static/"
+  - "**/venv/"
+
+plugins:
+  sonar-python:
+    enabled: true
+    config:
+      minimum_severity: info
+      tests_patterns:
+        - "**/test/**"
