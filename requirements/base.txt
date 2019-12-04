@@ -1,5 +1,5 @@
 # Django
-Django==2.2.7
+Django==2.2.8
 django-environ==0.4.5
 
 # REST Framework
