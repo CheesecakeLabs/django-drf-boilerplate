@@ -1,0 +1,59 @@
+[
+  {
+    "name": "${container_name}",
+    "image": "${container_image}",
+    "essential": true,
+    "memoryReservation": 128,
+    "logConfiguration": {
+      "logDriver": "awslogs",
+      "options": {
+        "awslogs-group" : "${cloudwatch_log_group}",
+        "awslogs-region": "${aws_region}",
+        "awslogs-stream-prefix": "ecs"
+      }
+    },
+    "portMappings": [{
+      "hostPort": 0,
+      "protocol": "tcp",
+      "containerPort": 8000
+    }],
+    "environment": [
+      {
+        "name": "ENVIRONMENT",
+        "value": "${environment}"
+      },
+      {
+        "name": "DJANGO_SECRET_KEY",
+        "value": "${django_secret_key}"
+      },
+      {
+        "name": "DJANGO_DEBUG",
+        "value": "${django_debug}"
+      },
+      {
+        "name": "DJANGO_ALLOWED_HOSTS",
+        "value": "${django_allowed_hosts}"
+      },
+      {
+        "name": "DATABASE_URL",
+        "value": "${database_url}"
+      },
+      {
+        "name": "AWS_REGION",
+        "value": "${aws_region}"
+      },
+      {
+        "name": "AWS_STORAGE_BUCKET_NAME",
+        "value": "${app_bucket}"
+      },
+      {
+        "name": "APP_DOMAIN",
+        "value": "${app_domain}"
+      },
+      {
+        "name": "EMAIL_FROM",
+        "value": "${email_from}"
+      }
+    ]
+  }
+]
