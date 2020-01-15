@@ -54,21 +54,17 @@ jobs:
       - run:
           name: Load archived Docker image
           command: docker load -i /tmp/workspace/image.tar
-      - run: |
-          eval $(aws ecr get-login --region ${AWS_DEFAULT_REGION} | sed 's|https://||' | sed 's|-e none ||')
-          docker tag ${IMAGE_NAME}:latest ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${AWS_RESOURCE_NAME_PREFIX_STAGING}:${CIRCLE_SHA1}
-          docker push ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${AWS_RESOURCE_NAME_PREFIX_STAGING}:${CIRCLE_SHA1}
+      - run: eval $(aws ecr get-login --region ${AWS_DEFAULT_REGION} | sed 's|https://||' | sed 's|-e none ||')
+      - run: bash scripts/release.sh $CIRCLE_BRANCH
   deploy:
     docker:
       - image: circleci/python:3.6.9-stretch
     steps:
-      - run: eval $(aws ecr get-login --region ${AWS_DEFAULT_REGION} | sed 's|https://||' | sed 's|-e none ||')
       - run: sudo pip install awsebcli --upgrade
+      - run: eval $(aws ecr get-login --region ${AWS_DEFAULT_REGION} | sed 's|https://||' | sed 's|-e none ||')
       - run:
           name: Deploying AWS ECS
-          command: ecs-deploy -c ${AWS_CLUSTER_NAME} -n ${AWS_SERVICE_NAME} -i \
-                ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${AWS_RESOURCE_NAME_PREFIX_LAB}:${CIRCLE_SHA1} \
-                -r ${AWS_DEFAULT_REGION}
+          command: bash scripts/deploy.sh $CIRCLE_BRANCH
           no_output_timeout: 30m
 
 workflows:
@@ -87,6 +83,15 @@ workflows:
               only:
                 - master
                 - staging
+                # - lab
+      - deploy:
+          requires:
+            - release
+          filters:
+            branches:
+              only:
+                - staging
+                # - lab
   tagged-build:
     jobs:
       - deploy:
