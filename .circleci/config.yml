@@ -9,7 +9,10 @@ references:
 
 jobs:
   build:
-    <<: *defaults
+    docker:
+      - image: circleci/buildpack-deps:stretch
+    environment:
+      IMAGE_NAME: organization-name/project-name
     steps:
       - checkout
       - setup_remote_docker
@@ -25,7 +28,15 @@ jobs:
           paths:
             - ./image.tar
   tests:
-    <<: *defaults
+    docker:
+      - image: circleci/buildpack-deps:stretch
+        environment:
+          IMAGE_NAME: organization-name/project-name
+      - image: circleci/postgres:9.6.6-alpine
+        environment:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: app
     steps:
       - attach_workspace:
           at: /tmp/workspace
@@ -34,9 +45,12 @@ jobs:
       - run:
           name: Load archived Docker image
           command: docker load -i /tmp/workspace/image.tar
-      - run: docker-compose -f docker-compose.test.yml up
+      - run: docker-compose -f docker-compose.test.yml web up
   release:
-    <<: *defaults
+    docker:
+      - image: circleci/buildpack-deps:stretch
+    environment:
+      IMAGE_NAME: organization-name/project-name
     steps:
       - attach_workspace:
           at: /tmp/workspace
