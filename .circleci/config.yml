@@ -1,18 +1,14 @@
 version: 2
 
 references:
-  defaults: &defaults
-    docker:
-      - image: circleci/buildpack-deps:stretch
-    environment:
-      IMAGE_NAME: organization-name/project-name
+  image_name: &image_name organization-name/project-name
 
 jobs:
   build:
     docker:
       - image: circleci/buildpack-deps:stretch
     environment:
-      IMAGE_NAME: organization-name/project-name
+      IMAGE_NAME: *image_name
     steps:
       - checkout
       - setup_remote_docker
@@ -31,7 +27,7 @@ jobs:
     docker:
       - image: circleci/buildpack-deps:stretch
         environment:
-          IMAGE_NAME: organization-name/project-name
+          IMAGE_NAME: *image_name
       - image: circleci/postgres:9.6.6-alpine
         environment:
           POSTGRES_USER: postgres
@@ -50,7 +46,7 @@ jobs:
     docker:
       - image: circleci/buildpack-deps:stretch
     environment:
-      IMAGE_NAME: organization-name/project-name
+      IMAGE_NAME: *image_name
     steps:
       - attach_workspace:
           at: /tmp/workspace
