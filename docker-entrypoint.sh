@@ -2,6 +2,7 @@
 set -e
 
 if [ "$ENV" = "development" ] ; then
+    # Check Postgres database
     python docker/web/check_db.py --service-name postgres --ip db --port 5432
 fi
 

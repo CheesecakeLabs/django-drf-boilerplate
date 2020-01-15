@@ -1,0 +1,18 @@
+version: "3"
+services:
+  web:
+    build: .
+    environment:
+      ENV: development
+      DJANGO_ALLOWED_HOSTS: "*"
+      DATABASE_URL: "psql://postgres:postgres@db:5432/app"
+    depends_on: 
+      - db
+    command: manage test
+
+  db:
+    image: circleci/postgres:9.6.6-alpine
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: app
