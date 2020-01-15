@@ -1,7 +1,7 @@
 version: 2
 
 references:
-  defauts: &defauts
+  defaults: &defaults
     docker:
       - image: circleci/buildpack-deps:stretch
     environment:
@@ -9,7 +9,7 @@ references:
 
 jobs:
   build:
-    <<: *defauts
+    <<: *defaults
     steps:
       - checkout
       - setup_remote_docker
@@ -25,7 +25,7 @@ jobs:
           paths:
             - ./image.tar
   tests:
-    <<: *defauts
+    <<: *defaults
     steps:
       - attach_workspace:
           at: /tmp/workspace
@@ -35,7 +35,7 @@ jobs:
           command: docker load -i /tmp/workspace/image.tar
       - run: echo "tests"
   release:
-    <<: *defauts
+    <<: *defaults
     steps:
       - attach_workspace:
           at: /tmp/workspace
@@ -45,7 +45,7 @@ jobs:
           command: docker load -i /tmp/workspace/image.tar
       - run: echo "release"
   deploy:
-    <<: *defauts
+    <<: *defaults
     steps:
       - run: echo "deploy"
 
