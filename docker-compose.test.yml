@@ -1,13 +1,11 @@
 version: "3"
 services:
   web:
-    build: organization-name/project-name # IMAGE_NAME value from circleci
+    image: organization-name/project-name # IMAGE_NAME value from circleci
     environment:
       ENV: development
       DJANGO_ALLOWED_HOSTS: "*"
       DATABASE_URL: "psql://postgres:postgres@db:5432/app"
-    depends_on:
-      - db
     command: manage test
 
   db:
