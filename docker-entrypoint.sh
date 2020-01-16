@@ -3,7 +3,7 @@ set -e
 
 if [ "$ENV" = "development" ] ; then
     # Check Postgres database
-    python docker/web/check_db.py --service-name postgres --ip db --port 5432
+    python docker/web/check_db.py --service-name postgres --ip 127.0.0.1 --port 5432
     pip install -r requirements/dev.txt
 
     # Black it
