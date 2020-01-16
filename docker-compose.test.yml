@@ -5,15 +5,13 @@ services:
     environment:
       ENV: development
       DJANGO_ALLOWED_HOSTS: "*"
-      DATABASE_URL: "psql://postgres:postgres@localhost:5432/app"
+      DATABASE_URL: "psql://postgres:postgres@db:5432/app"
     command: manage test
     depends_on: 
       - db
 
   db:
     image: circleci/postgres:9.6.6-alpine
-    ports: 
-      - 5432:5432
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
