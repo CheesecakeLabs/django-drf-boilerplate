@@ -66,10 +66,17 @@ workflows:
   version: 2
   untagged-build:
     jobs:
-      - build
+      - build:
+          filters:
+            branches:
+              ignore: /hotfix.*/
+
       - tests:
           requires:
             - build
+          filters:
+            branches:
+              ignore: /hotfix.*/
       - release:
           requires:
             - tests
