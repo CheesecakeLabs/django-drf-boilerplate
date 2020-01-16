@@ -41,7 +41,7 @@ jobs:
       - run:
           name: Load archived Docker image
           command: docker load -i /tmp/workspace/image.tar
-      - run: docker-compose -f docker-compose.test.yml up --exit-code-from web
+      - run: docker-compose -f docker-compose.test.yml up --exit-code-from web web
   release:
     docker:
       - image: circleci/buildpack-deps:stretch
