@@ -145,7 +145,7 @@ AUTH_USER_MODEL = "users.User"
 
 # Sentry
 
-if not DEBUG:
+if env.bool("ENABLE_SENTRY", False):
     import sentry_sdk
     from sentry_sdk.integrations.django import DjangoIntegration
 
