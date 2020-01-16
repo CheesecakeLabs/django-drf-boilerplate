@@ -32,6 +32,13 @@ $ docker-compose up
 
 Check code syntax and style before committing changes.
 
+Pre-commit hook may be installed using the following steps:
+
+```bash
+$ pip install -r requirements/dev.txt
+$ pre-commit install
+```
+
 Or run it manually:
 
 ```bash
