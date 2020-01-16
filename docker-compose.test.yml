@@ -5,7 +5,7 @@ services:
     environment:
       ENV: development
       DJANGO_ALLOWED_HOSTS: "*"
-      DATABASE_URL: "psql://postgres:postgres@localhost:5432/app"
+      DATABASE_URL: "psql://postgres:postgres@127.0.0.1:5432/app"
     command: manage test
 
   db:
