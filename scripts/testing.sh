@@ -3,7 +3,7 @@ set -e
 set -u
 
 pip install -r requirements/dev.txt
-python manage.py collectstatic --noinput
+python src/manage.py collectstatic --noinput
 
 coverage erase
 coverage run -m pytest -s
