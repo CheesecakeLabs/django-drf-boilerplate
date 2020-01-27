@@ -4,6 +4,13 @@ references:
   image_name: &image_name organization-name/project-name
 
 jobs:
+  python_linter:
+    docker:
+      - image: circleci/python:3.6.9-stretch
+    steps:
+      - checkout
+      - run: sudo pip install black
+      - run: black --check .
   build:
     docker:
       - image: circleci/buildpack-deps:stretch
@@ -66,11 +73,16 @@ workflows:
   version: 2
   untagged-build:
     jobs:
-      - build:
+      - python_linter:
           filters:
             branches:
               ignore: /hotfix.*/
-
+      - build:
+          requires:
+            - python_linter
+          filters:
+            branches:
+              ignore: /hotfix.*/
       - tests:
           requires:
             - build
