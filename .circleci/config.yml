@@ -12,8 +12,8 @@ jobs:
       - run: sudo pip install black
       - run: black --check .
   build:
-    docker:
-      - image: circleci/buildpack-deps:stretch
+    machine:
+      docker_layer_caching: true
     environment:
       IMAGE_NAME: *image_name
     steps:
