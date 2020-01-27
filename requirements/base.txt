@@ -7,7 +7,7 @@ djangorestframework==3.9.4
 django-cors-headers==3.2.0
 
 # Database
-psycopg2==2.8.4
+psycopg2-binary==2.8.4
 
 # Static files
 whitenoise==4.1.4
