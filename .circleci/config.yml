@@ -18,7 +18,6 @@ jobs:
       IMAGE_NAME: *image_name
     steps:
       - checkout
-      - setup_remote_docker
       - run:
           name: Build Docker image
           command: |
