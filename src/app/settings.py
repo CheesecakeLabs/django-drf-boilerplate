@@ -167,9 +167,10 @@ VERSATILEIMAGEFIELD_SETTINGS = {
     'progressive_jpeg': False
 }
 
-# The rendition key sets are only used if 'create_images_on_demand' is set to False
+# The rendition key sets will be used if 'create_images_on_demand' is set to False
 # It will improve the overall performance of your app by pre warming images
 # These values should come from the app's design specs
+# https://django-versatileimagefield.readthedocs.io/en/latest/installation.html#versatileimagefield-rendition-key-sets
 
 # VERSATILEIMAGEFIELD_RENDITION_KEY_SETS = {
 #     'image_gallery': [
