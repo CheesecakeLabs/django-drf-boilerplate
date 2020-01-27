@@ -2,6 +2,8 @@ version: "3"
 services:
   web:
     image: organization-name/project-name # IMAGE_NAME value from circleci
+    volumes:
+      - .:/usr/src/app
     environment:
       ENV: development
       DJANGO_ALLOWED_HOSTS: "*"
