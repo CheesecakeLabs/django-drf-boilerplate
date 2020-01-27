@@ -142,3 +142,11 @@ REST_FRAMEWORK = {
 # Auth
 
 AUTH_USER_MODEL = "users.User"
+
+# Sentry
+
+if env.bool("ENABLE_SENTRY", False):
+    import sentry_sdk
+    from sentry_sdk.integrations.django import DjangoIntegration
+
+    sentry_sdk.init(dsn=env("SENTRY_DSN"), integrations=[DjangoIntegration()])
