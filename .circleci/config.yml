@@ -74,12 +74,14 @@ jobs:
     environment:
       IMAGE_NAME: *image_name
     steps:
+      - checkout
       - attach_workspace:
           at: /tmp/workspace
       - setup_remote_docker
       - run:
           name: Load archived Docker image
           command: docker load -i /tmp/workspace/image.tar
+      - run: sudo pip install awscli --upgrade
       - run: eval $(aws ecr get-login --region ${AWS_DEFAULT_REGION} | sed 's|https://||' | sed 's|-e none ||')
       - run: bash scripts/release.sh $CIRCLE_BRANCH
   deploy:
