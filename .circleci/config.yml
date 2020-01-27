@@ -49,6 +49,25 @@ jobs:
           root: .
           paths:
             - ./coverage.xml
+  analysis_codeclimate:
+    docker:
+      - image: circleci/python:3.6.9-stretch
+    steps:
+      - checkout
+      - attach_workspace:
+          at: /tmp/workspace
+      - run:
+          command: |
+            curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+            chmod +x ./cc-test-reporter
+      - run: cp /tmp/workspace/coverage.xml ./coverage.xml
+      - run:
+          name: Upload coverage results to Code Climate
+          command: |
+            ./cc-test-reporter format-coverage -t coverage.py -o codeclimate.json
+            ./cc-test-reporter upload-coverage -i codeclimate.json
+      - store_artifacts:
+          path: codeclimate.json
   release:
     docker:
       - image: circleci/buildpack-deps:stretch
@@ -94,9 +113,15 @@ workflows:
           filters:
             branches:
               ignore: /hotfix.*/
-      - release:
+      - analysis_codeclimate:
           requires:
             - tests
+          filters:
+            branches:
+              ignore: /hotfix.*/
+      - release:
+          requires:
+            - analysis_codeclimate
           filters:
             branches:
               only:
