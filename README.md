@@ -45,6 +45,30 @@ Or run it manually:
 $ black .
 ```
 
+## The initial workflow on circleci
+
+Follow those map of branchs and 
+![](https://i.ibb.co/82xhB1j/Django-Boilerplate-Pipeline-1.jpg)
+
+update the image name at config.yaml and docker-compose.test.yaml
+```yaml
+references:
+  image_name: &image_name organization-name/project-name
+```
+```yaml
+web:
+    image: organization-name/project-name
+```
+
+don't forget to define these environment variables in your circleci project settings:
+- AWS_DEFAULT_REGION
+- AWS_ACCOUNT_ID
+- AWS_RESOURCE_NAME_PREFIX
+- AWS_SERVICE_NAME_LAB
+- AWS_SERVICE_NAME_STAGING
+- AWS_SERVICE_NAME_PROD
+
+
 ## Database
 
 Running database on latest PostgreSQL Docker container running in the port `5432`. The connection is defined by the `dj-database-url` package. There's a race condition script to avoid running Django before the database goes up.
