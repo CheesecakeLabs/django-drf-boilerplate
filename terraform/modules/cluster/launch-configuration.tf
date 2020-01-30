@@ -36,10 +36,4 @@ resource "aws_launch_configuration" "lc" {
   lifecycle {
     create_before_destroy = true
   }
-
-  root_block_device {
-    volume_type = "standard"
-    volume_size = 40 #The latest ami snapshot needs more than 30GB to create the EC2 instance
-    delete_on_termination = true
-  }
 }
