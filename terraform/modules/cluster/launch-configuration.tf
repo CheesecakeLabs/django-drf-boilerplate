@@ -3,7 +3,7 @@ data "aws_ami" "ecs-optimized" {
 
   filter {
     name = "name"
-    values = ["amzn-ami*amazon-ecs-optimized"]
+    values = ["amzn2-ami-ecs-hvm*"]
   }
 
   filter {
@@ -16,7 +16,7 @@ data "aws_ami" "ecs-optimized" {
     values = ["hvm"]
   }
 
-  owners = ["591542846629"] # AWS
+  owners = ["amazon"] # AWS
 }
 
 resource "aws_launch_configuration" "lc" {
