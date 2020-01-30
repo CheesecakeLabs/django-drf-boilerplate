@@ -1,15 +1,21 @@
 #!/bin/bash
 set -e
 
-if [ "$ENV" = "development" ] ; then
-    python docker/web/check_db.py --service-name postgres --ip db --port 5432
+if [ -n "$1" ]; then
+    exec "$@"
 fi
 
-if [ "$1" = "manage" ]; then
-    shift 1
-    exec python src/manage.py "$@"
+if [ "$ENV" = "development" ] ; then
+    # Check Postgres database
+    python docker/web/check_db.py --service-name postgres --ip db --port 5432
+    pip install -r requirements/dev.txt
+fi
+
+python src/manage.py migrate                  # Apply database migrations
+
+if [ "$ENV" = "development" ] ; then
+    python src/manage.py runserver
 else
-    python src/manage.py migrate                  # Apply database migrations
     python src/manage.py collectstatic --noinput  # Collect static files
 
     # Prepare log files and start outputting logs to stdout
