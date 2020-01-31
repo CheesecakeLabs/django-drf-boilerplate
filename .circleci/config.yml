@@ -6,7 +6,7 @@ references:
 jobs:
   python_linter:
     docker:
-      - image: circleci/python:3.6.9-stretch
+      - image: circleci/python:3.8.0b1-stretch
     steps:
       - checkout
       - run: sudo pip install black
@@ -50,7 +50,7 @@ jobs:
             - ./coverage.xml
   analysis_codeclimate:
     docker:
-      - image: circleci/python:3.6.9-stretch
+      - image: circleci/python:3.8.0b1-stretch
     steps:
       - checkout
       - attach_workspace:
@@ -69,7 +69,7 @@ jobs:
           path: codeclimate.json
   release:
     docker:
-      - image: circleci/buildpack-deps:stretch
+      - image: circleci/python:3.8.0b1-stretch
     environment:
       IMAGE_NAME: *image_name
     steps:
@@ -85,7 +85,7 @@ jobs:
       - run: bash scripts/release.sh $CIRCLE_BRANCH
   deploy:
     docker:
-      - image: circleci/python:3.6.9-stretch
+      - image: circleci/python:3.8.0b1-stretch
     steps:
       - checkout
       - run:
