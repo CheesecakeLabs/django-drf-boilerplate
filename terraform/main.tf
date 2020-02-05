@@ -24,6 +24,8 @@ module "network" {
   region = var.region
   project_name = var.project_name
   environment = terraform.workspace
+  availability_zone_1 = var.availability_zone_1
+  availability_zone_2 = var.availability_zone_2
 }
 
 module "iam" {
@@ -41,9 +43,10 @@ module "database" {
   project_name = var.project_name
   environment = terraform.workspace
   vpc_id = module.network.vpc_id
-  private_security_group = module.network.private_secutity_group_id
-  private_subnet_id = module.network.private_subnet_id
-  private_subnet_2_id = module.network.private_subnet_2_id
+  security_group = module.network.private_security_group_id
+  subnet_1_id = module.network.private_subnet_1_id
+  subnet_2_id = module.network.private_subnet_2_id
+  availability_zone = var.availability_zone_1
   db_instance_type = var.db_instance_type
   db_storage_size = var.db_storage_size
   db_username = var.db_username
@@ -69,12 +72,14 @@ module "cluster" {
   max_instances = var.cluster_max_instances
   min_instances = var.cluster_min_instances
   desired_instances = var.cluster_desired_instances
-  private_secutity_group_id = module.network.private_secutity_group_id
-  public_secutity_group_id = module.network.public_secutity_group_id
-  private_subnet_id = module.network.private_subnet_id
+  private_security_group_id = module.network.private_security_group_id
+  public_security_group_id = module.network.public_security_group_id
+  private_subnet_1_id = module.network.private_subnet_1_id
   private_subnet_2_id = module.network.private_subnet_2_id
-  public_subnet_id = module.network.public_subnet_id
+  public_subnet_1_id = module.network.public_subnet_1_id
   public_subnet_2_id = module.network.public_subnet_2_id
+  availability_zone_1 = var.availability_zone_1
+  availability_zone_2 = var.availability_zone_2
   domains = var.domains
   app_bucket = module.files.app_bucket.bucket
   database = {

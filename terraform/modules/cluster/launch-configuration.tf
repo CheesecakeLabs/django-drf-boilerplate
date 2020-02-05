@@ -23,7 +23,7 @@ resource "aws_launch_configuration" "lc" {
   name_prefix = "${var.project_name}-${var.environment}"
   image_id = data.aws_ami.ecs-optimized.id
   instance_type = var.instance_type
-  security_groups = [var.public_secutity_group_id, var.private_secutity_group_id]
+  security_groups = [var.private_security_group_id]
   iam_instance_profile = var.ecs_instance_profile_id
   user_data = <<EOF
       #!/bin/bash

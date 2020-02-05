@@ -1,11 +1,13 @@
 variable "environment" {}
 variable "project_name" {}
 variable "region" {}
-variable "private_secutity_group_id" {}
-variable "public_secutity_group_id" {}
-variable "private_subnet_id" {}
+variable "availability_zone_1" {}
+variable "availability_zone_2" {}
+variable "private_security_group_id" {}
+variable "public_security_group_id" {}
+variable "private_subnet_1_id" {}
 variable "private_subnet_2_id" {}
-variable "public_subnet_id" {}
+variable "public_subnet_1_id" {}
 variable "public_subnet_2_id" {}
 variable "vpc_id" {}
 variable "ecs_instance_role" {}

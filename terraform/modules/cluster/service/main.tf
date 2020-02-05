@@ -24,6 +24,8 @@ resource "aws_ecs_service" "service" {
   }
 
   depends_on = [
+    var.lb_listener_http,
+    var.lb_listener_https,
     aws_lb_target_group.tg,
   ]
 }
