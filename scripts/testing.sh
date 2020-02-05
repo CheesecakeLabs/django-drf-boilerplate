@@ -2,7 +2,7 @@
 set -e
 set -u
 
-pip install -r requirements/dev.txt
+pip install -r "requirements/test.txt"
 python src/manage.py collectstatic --noinput
 
 coverage erase
