@@ -7,6 +7,12 @@ variable "aws_profile" {
 variable "project_name" {
   description = "Our project name"
 }
+variable "availability_zone_1" {
+  default = "a"
+}
+variable "availability_zone_2" {
+  default = "b"
+}
 variable "cluster_instance_type" {
   description = "The type of EC2 instance used on the cluster. ex: (t2.micro, t2.small...)"
   default = "t3.micro"

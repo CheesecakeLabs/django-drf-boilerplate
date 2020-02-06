@@ -4,7 +4,7 @@ resource "aws_autoscaling_group" "asg" {
   min_size = var.min_instances
   desired_capacity = var.desired_instances
   launch_configuration = aws_launch_configuration.lc.name
-  vpc_zone_identifier = [var.private_subnet_id]
+  vpc_zone_identifier = [var.private_subnet_1_id, var.private_subnet_2_id]
   health_check_type = "EC2"
 
   tag {
