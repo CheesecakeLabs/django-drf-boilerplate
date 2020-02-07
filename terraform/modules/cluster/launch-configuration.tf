@@ -19,6 +19,17 @@ data "aws_ami" "ecs-optimized" {
   owners = ["amazon"] # AWS
 }
 
+resource "aws_key_pair" "ssh_access" {
+  key_name   = "${var.project_name}-${var.environment}-key"
+  public_key = var.public_key
+
+  tags = {
+    "ckl:environment" = var.environment
+    "ckl:project" = var.project_name
+    "ckl:alias" = "cluster"
+  }
+}
+
 resource "aws_launch_configuration" "lc" {
   name_prefix = "${var.project_name}-${var.environment}"
   image_id = data.aws_ami.ecs-optimized.id
@@ -36,4 +47,5 @@ resource "aws_launch_configuration" "lc" {
   lifecycle {
     create_before_destroy = true
   }
+  depends_on = [aws_key_pair.ssh_access]
 }

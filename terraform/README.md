@@ -34,6 +34,16 @@ The environments are separated by [Terraform workspace](https://www.terraform.io
     - You can create new workspaces with `terraform workspace new`
  - Create a `./terraform.tfvars` file and populate it with input variables present on 
    `./variables.tf`
+ - Create a key pair:
+    ```
+    $ ssh-keygen -m PEM
+   ```
+   Get the public key value and set the variable `public_key` in `./terraform.tfvars`:
+   ```
+    $ ssh-keygen -y -f /path/to/key
+    ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC5u................
+    ```
+
  - To verify what will be changed, run `terraform plan`
  - If everything is ok, run `terraform apply` and confirm.
  - The update takes some time... So, go drink a coffee ☕️.

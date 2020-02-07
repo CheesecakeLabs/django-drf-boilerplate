@@ -90,4 +90,5 @@ module "cluster" {
   }
   backend_secret_key = var.backend_secret_key
   backend_email_from = var.backend_email_from
+  public_key = var.public_key
 }
