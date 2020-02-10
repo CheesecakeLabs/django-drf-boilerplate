@@ -40,6 +40,7 @@ THIRD_PARTY_APPS = [
     "rest_framework",
     "rest_framework.authtoken",
     "corsheaders",
+    "versatileimagefield",
 ]
 
 PROJECT_APPS = ["users"]
@@ -150,3 +151,29 @@ if env.bool("ENABLE_SENTRY", False):
     from sentry_sdk.integrations.django import DjangoIntegration
 
     sentry_sdk.init(dsn=env("SENTRY_DSN"), integrations=[DjangoIntegration()])
+
+# VersatileImageField
+# https://django-versatileimagefield.readthedocs.io/en/latest/installation.html#settings
+
+VERSATILEIMAGEFIELD_SETTINGS = {
+    "cache_length": 2592000,
+    "cache_name": "versatileimagefield_cache",
+    "jpeg_resize_quality": 70,
+    "sized_directory_name": "__sized__",
+    "filtered_directory_name": "__filtered__",
+    "placeholder_directory_name": "__placeholder__",
+    "create_images_on_demand": True,
+    "image_key_post_processor": None,
+    "progressive_jpeg": False,
+}
+
+# The rendition key sets will be used if 'create_images_on_demand' is set to False
+# It will improve the overall performance of your app by pre warming images
+# These values should come from the app's design specs
+# https://django-versatileimagefield.readthedocs.io/en/latest/installation.html#versatileimagefield-rendition-key-sets
+
+# VERSATILEIMAGEFIELD_RENDITION_KEY_SETS = {
+#     'image_gallery': [
+#         ('gallery_large', 'crop__800x450'),
+#     ],
+# }

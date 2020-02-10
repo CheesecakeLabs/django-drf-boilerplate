@@ -2,6 +2,10 @@
 Django==2.2.8
 django-environ==0.4.5
 
+# Images
+Pillow==6.2.1
+django-versatileimagefield==2.0
+
 # REST Framework
 djangorestframework==3.9.4
 django-cors-headers==3.2.0
