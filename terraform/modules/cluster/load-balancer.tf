@@ -2,8 +2,8 @@ resource "aws_lb" "lb" {
   name = "${var.project_name}-${var.environment}"
   internal = false
   load_balancer_type = "application"
-  security_groups = [var.public_secutity_group_id]
-  subnets = [var.public_subnet_id, var.public_subnet_2_id]
+  security_groups = [var.public_security_group_id]
+  subnets = [var.public_subnet_1_id, var.public_subnet_2_id]
 
   tags = {
     Name = "${var.project_name}-${var.environment}"
