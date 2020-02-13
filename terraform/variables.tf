@@ -54,3 +54,4 @@ variable "domains" {
 
 variable "backend_secret_key" {}
 variable "backend_email_from" {}
+variable "public_key" {}

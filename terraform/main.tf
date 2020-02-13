@@ -43,7 +43,7 @@ module "database" {
   project_name = var.project_name
   environment = terraform.workspace
   vpc_id = module.network.vpc_id
-  security_group = module.network.private_security_group_id
+  security_group = module.network.database_security_group_id
   subnet_1_id = module.network.private_subnet_1_id
   subnet_2_id = module.network.private_subnet_2_id
   availability_zone = var.availability_zone_1
@@ -90,4 +90,5 @@ module "cluster" {
   }
   backend_secret_key = var.backend_secret_key
   backend_email_from = var.backend_email_from
+  public_key = var.public_key
 }

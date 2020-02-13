@@ -58,3 +58,31 @@ resource "aws_security_group" "private_security_group" {
     "ckl:alias" = "network"
   }
 }
+
+resource "aws_security_group" "database_security_group" {
+  name = "${var.project_name}-${var.environment}-database"
+  description = "Private access allowed from private security group"
+  vpc_id = aws_vpc.vpc.id
+
+  ingress {
+    from_port = 0
+    to_port = 0
+    protocol = "-1"
+    security_groups = [
+      aws_security_group.private_security_group.id
+    ]
+  }
+
+  egress {
+    from_port = 0
+    to_port = 0
+    protocol = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  tags = {
+    "ckl:environment" = var.environment
+    "ckl:project" = var.project_name
+    "ckl:alias" = "network"
+  }
+}
