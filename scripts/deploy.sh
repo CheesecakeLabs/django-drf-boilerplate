@@ -4,21 +4,25 @@ set -e
 set -u
 
 SERVICE_NAME=""
+AWS_CLUSTER_NAME=""
 TAG=""
 case $1 in
     "lab")
         echo "deploying to LAB"
         SERVICE_NAME=${AWS_SERVICE_NAME_LAB}
+        AWS_CLUSTER_NAME=${AWS_CLUSTER_NAME_LAB}
         TAG="lab"
     ;;
     "staging")
         echo "deploying to STAGING"
         SERVICE_NAME=${AWS_SERVICE_NAME_STAGING}
+        AWS_CLUSTER_NAME=${AWS_CLUSTER_NAME_STAGING}
         TAG="staging"
     ;;
     *)
         echo "deploying to PRODUCTION"
         SERVICE_NAME=${AWS_SERVICE_NAME_PROD}
+        AWS_CLUSTER_NAME=${AWS_CLUSTER_NAME_PROD}
         TAG=${CIRCLE_TAG}
         docker tag ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${AWS_RESOURCE_NAME_PREFIX}:latest ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${AWS_RESOURCE_NAME_PREFIX}:${CIRCLE_TAG}
         docker push ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${AWS_RESOURCE_NAME_PREFIX}:${CIRCLE_TAG}
