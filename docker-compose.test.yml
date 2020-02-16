@@ -5,10 +5,9 @@ services:
     volumes:
       - .:/usr/src/app
     environment:
-      ENV: development
+      ENV: testing
       DJANGO_ALLOWED_HOSTS: "*"
       DATABASE_URL: "psql://postgres:postgres@db:5432/app"
-      INTERNAL_IPS: localhost,
     command: sh scripts/testing.sh
     depends_on:
       - db
