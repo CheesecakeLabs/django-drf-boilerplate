@@ -8,8 +8,9 @@ services:
       ENV: development
       DJANGO_ALLOWED_HOSTS: "*"
       DATABASE_URL: "psql://postgres:postgres@db:5432/app"
+      INTERNAL_IPS: localhost,
     command: sh scripts/testing.sh
-    depends_on: 
+    depends_on:
       - db
 
   db:
