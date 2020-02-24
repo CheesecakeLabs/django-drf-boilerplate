@@ -19,6 +19,6 @@ case $1 in
         exit 1
     ;;
 esac
-echo "release ${CIRCLECI_BRANCH}"
+echo "release ${CIRCLE_BRANCH}"
 docker tag ${IMAGE_NAME}:latest ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${AWS_RESOURCE_NAME_PREFIX}:${TAG}
 docker push ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${AWS_RESOURCE_NAME_PREFIX}:${TAG}
