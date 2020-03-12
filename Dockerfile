@@ -1,6 +1,6 @@
-FROM python:3.8-alpine
+FROM python:3.8-slim-buster
 
-RUN apk update && apk add build-base postgresql-dev jpeg-dev zlib-dev
+RUN apt-get update && apt-get install --yes libmagic-dev
 
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
