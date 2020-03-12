@@ -17,3 +17,8 @@ variable "health_check_path" {
   default = "/"
 }
 variable "container_env_vars" {}
+variable "force_https_redirect" {
+  description = "This options will force the loadbalancer to redirect to HTTPS"
+  type = bool
+  default = false
+}
