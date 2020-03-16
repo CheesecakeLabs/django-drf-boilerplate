@@ -61,12 +61,22 @@ web:
 ```
 
 don't forget to define these environment variables in your circleci project settings:
-- AWS_DEFAULT_REGION
-- AWS_ACCOUNT_ID
-- AWS_RESOURCE_NAME_PREFIX
-- AWS_SERVICE_NAME_LAB
-- AWS_SERVICE_NAME_STAGING
-- AWS_SERVICE_NAME_PROD
+- `AWS_ACCOUNT_ID`
+- `AWS_ACCESS_KEY_ID`
+- `AWS_SECRET_ACCESS_KEY`
+- `AWS_DEFAULT_REGION` (ex: `us-east-1`)
+- `AWS_RESOURCE_NAME_PREFIX` (ex: `${project_name}-backend`)
+- `AWS_SERVICE_NAME_LAB` (ex: `${project_name}-backend-lab`)
+- `AWS_SERVICE_NAME_STAGING` (ex: `${project_name}-backend-staging`)
+- `AWS_SERVICE_NAME_PROD` (ex: `${project_name}-backend-production`)
+- `AWS_CLUSTER_NAME_LAB` (ex: `${project_name}-lab`)
+- `AWS_CLUSTER_NAME_STAGING` (ex: `${project_name}-staging`)
+- `AWS_CLUSTER_NAME_PROD` (ex: `${project_name}-production`)
+- `CC_TEST_REPORTER_ID` ([from CodeClimate](https://docs.codeclimate.com/docs/finding-your-test-coverage-token))
+- `ENVIRONMENT` (ex: `development`)
+- `DJANGO_DEBUG` (ex: `True`)
+- `DJANGO_ALLOWED_HOSTS` (ex: `*,`)
+- `DJANGO_SECRET_KEY`
 
 
 ## Database
