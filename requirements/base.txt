@@ -20,4 +20,4 @@ whitenoise==5.0.1
 gunicorn==20.0.4
 
 # Sentry
-sentry-sdk==0.14.2
+sentry-sdk==0.14.3
