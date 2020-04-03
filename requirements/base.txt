@@ -3,7 +3,7 @@ Django==2.2.10
 django-environ==0.4.5
 
 # Images
-Pillow==7.0.0
+Pillow==7.1.1
 django-versatileimagefield==2.0
 
 # REST Framework
