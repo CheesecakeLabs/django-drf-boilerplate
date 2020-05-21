@@ -11,9 +11,7 @@ class BusinessException(APIException, ValidationError):
     default_detail = "unmapped_error"
     default_code = 0
 
-    BUSINESS_ERRORS = {
-        EXAMPLE_ERROR: "example_error",
-    }
+    BUSINESS_ERRORS = {EXAMPLE_ERROR: "example_error"}
 
     def __init__(self, error_code: int):
         try:
