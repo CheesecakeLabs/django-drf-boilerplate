@@ -22,7 +22,7 @@ SECRET_KEY = env(
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env.bool("DJANGO_DEBUG", False)
-
+ENVIRONMENT = env("ENV")
 ALLOWED_HOSTS = env.list("DJANGO_ALLOWED_HOSTS", default=[])
 
 # Application definition
@@ -78,6 +78,17 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = "app.wsgi.application"
+
+# Django debug toolbar settings
+
+if ENVIRONMENT == "development":
+    INSTALLED_APPS += ["debug_toolbar"]
+    MIDDLEWARE += ["debug_toolbar.middleware.DebugToolbarMiddleware"]
+    INTERNAL_IPS = env.list("INTERNAL_IPS", [])
+    DEBUG_TOOLBAR_CONFIG = {
+        "SHOW_TOOLBAR_CALLBACK": lambda request: not request.is_ajax()
+    }
+
 
 # Database
 
@@ -152,6 +163,7 @@ if env.bool("ENABLE_SENTRY", False):
     from sentry_sdk.integrations.django import DjangoIntegration
 
     sentry_sdk.init(dsn=env("SENTRY_DSN"), integrations=[DjangoIntegration()])
+
 
 # VersatileImageField
 # https://django-versatileimagefield.readthedocs.io/en/latest/installation.html#settings
