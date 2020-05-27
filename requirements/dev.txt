@@ -1,5 +1,5 @@
 black==19.10b0
-pre-commit==2.0.1
+pre-commit==2.4.0
 
 # Debugging
 django-debug-toolbar==2.2

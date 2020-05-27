@@ -3,21 +3,21 @@ Django==2.2.10
 django-environ==0.4.5
 
 # Images
-Pillow==7.0.0
+Pillow==7.1.2
 django-versatileimagefield==2.0
 
 # REST Framework
 djangorestframework==3.11.0
-django-cors-headers==3.2.1
+django-cors-headers==3.3.0
 
 # Database
-psycopg2-binary==2.8.4
+psycopg2-binary==2.8.5
 
 # Static files
-whitenoise==5.0.1
+whitenoise==5.1.0
 
 # Webserver
 gunicorn==20.0.4
 
 # Sentry
-sentry-sdk==0.14.1
+sentry-sdk==0.14.4

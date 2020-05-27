@@ -36,6 +36,7 @@ resource "aws_launch_configuration" "lc" {
   instance_type = var.instance_type
   security_groups = [var.private_security_group_id]
   iam_instance_profile = var.ecs_instance_profile_id
+  key_name = aws_key_pair.ssh_access.key_name
   user_data = <<EOF
       #!/bin/bash
       echo ECS_CLUSTER=${aws_ecs_cluster.cluster.name} >> /etc/ecs/ecs.config

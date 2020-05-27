@@ -16,6 +16,7 @@ resource "aws_lb_target_group" "tg" {
 }
 
 resource "aws_lb_listener_rule" "host_based_routing_http" {
+  count = var.force_https_redirect ? 0 : 1
   listener_arn = var.lb_listener_http.arn
 
   action {
@@ -25,7 +26,27 @@ resource "aws_lb_listener_rule" "host_based_routing_http" {
 
   condition {
     field = "host-header"
-    values = ["${var.domain}"]
+    values = [var.domain]
+  }
+}
+
+resource "aws_lb_listener_rule" "https_force_redirect" {
+  count = var.force_https_redirect ? 1 : 0
+  listener_arn = var.lb_listener_http.arn
+
+  action {
+    type = "redirect"
+
+    redirect {
+      port        = "443"
+      protocol    = "HTTPS"
+      status_code = "HTTP_301"
+    }
+  }
+
+  condition {
+    field = "host-header"
+    values = [var.domain]
   }
 }
 
@@ -39,6 +60,6 @@ resource "aws_lb_listener_rule" "host_based_routing_https" {
 
   condition {
     field = "host-header"
-    values = ["${var.domain}"]
+    values = [var.domain]
   }
 }
