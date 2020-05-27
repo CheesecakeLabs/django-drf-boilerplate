@@ -85,6 +85,7 @@ if ENVIRONMENT == "development":
     INSTALLED_APPS += ["debug_toolbar"]
     MIDDLEWARE += ["debug_toolbar.middleware.DebugToolbarMiddleware"]
     INTERNAL_IPS = env.list("INTERNAL_IPS", [])
+    DEBUG_TOOLBAR_CONFIG = {"SHOW_TOOLBAR_CALLBACK": lambda request: not request.is_ajax()}
 
 
 # Database
@@ -160,10 +161,6 @@ if env.bool("ENABLE_SENTRY", False):
     from sentry_sdk.integrations.django import DjangoIntegration
 
     sentry_sdk.init(dsn=env("SENTRY_DSN"), integrations=[DjangoIntegration()])
-
-
-if ENVIRONMENT == "development":
-    DEBUG_TOOLBAR_CONFIG = {"SHOW_TOOLBAR_CALLBACK": lambda request: True}
 
 
 # VersatileImageField
