@@ -14,7 +14,7 @@ fi
 python src/manage.py migrate                  # Apply database migrations
 
 if [ "$ENV" = "development" ] ; then
-    python src/manage.py runserver
+    python src/manage.py runserver 0.0.0.0:8000
 else
     python src/manage.py collectstatic --noinput  # Collect static files
 
