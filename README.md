@@ -50,22 +50,59 @@ Or run it manually:
 $ black .
 ```
 
+## Jira issues in commit messages
+
+For automatically adding Jira content to your commit message, install Git's
+`prepare-commit-msg` hook.
+
+```bash
+pre-commit install --hook-type prepare-commit-msg
+```
+
+Set the following `env` keys to your `bash_profile` or `zshenv`.
+
+```bash
+# https://cheesecakelabs.atlassian.net
+export jiraserver="https://domain.atlassian.net"
+export jirauser="your@email.com"
+
+# from: https://id.atlassian.com/manage-profile/security/api-tokens
+export jiratoken="token"
+```
+
+Finally, in `.pre-commit-config`, add your board name and the regex for your
+Jira ID
+
+## Block push on invalid branch name
+
+Git provides a `pre-push` hook, which checks the branch name before pushing to
+remote. This prevents pushing branches that do not follow a pattern name.
+
+```bash
+pre-commit install --hook-type pre-push
+```
+
+Then configure the required regex for branch name in `.pre-commit-config`
+
 ## The initial workflow on circleci
 
-Follow those map of branchs and 
+Follow those map of branchs and
 ![](https://i.ibb.co/82xhB1j/Django-Boilerplate-Pipeline-1.jpg)
 
 update the image name at config.yaml and docker-compose.test.yaml
+
 ```yaml
 references:
   image_name: &image_name organization-name/project-name
 ```
+
 ```yaml
 web:
-    image: organization-name/project-name
+  image: organization-name/project-name
 ```
 
 don't forget to define these environment variables in your circleci project settings:
+
 - `AWS_ACCOUNT_ID`
 - `AWS_ACCESS_KEY_ID`
 - `AWS_SECRET_ACCESS_KEY`
@@ -83,7 +120,6 @@ don't forget to define these environment variables in your circleci project sett
 - `DJANGO_ALLOWED_HOSTS` (ex: `*,`)
 - `DJANGO_SECRET_KEY`
 
-
 ## Database
 
 Running database on latest PostgreSQL Docker container running in the port `5432`. The connection is defined by the `dj-database-url` package. There's a race condition script to avoid running Django before the database goes up.
@@ -96,6 +132,7 @@ from helpers.business_errors import BusinessException, EXAMPLE_ERROR
 if logic_check:
     raise BusinessException(error_code=EXAMPLE_ERROR)
 ```
+
 `BusinessException` extends `APIException` (Django Rest Framework) and `ValidationError` (Django), so it is handled by their middlewares by default.
 
 ## Docs
