@@ -1,0 +1,3 @@
+Task ID: {{ key }}
+{% if parent__key %}Story ID: {{ parent__key }}{% endif %}
+{% if summary %}Summary: {{ summary }}{% endif %}
