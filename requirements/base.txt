@@ -14,7 +14,7 @@ django-cors-headers==3.4.0
 psycopg2-binary==2.8.5
 
 # Static files
-whitenoise==5.1.0
+whitenoise==5.2.0
 
 # Webserver
 gunicorn==20.0.4
