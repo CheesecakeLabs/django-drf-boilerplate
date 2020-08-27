@@ -42,8 +42,19 @@ def remove_health_check():
         PROJECT_DIRECTORY, "src", "helpers", "health_check.py"
     ))
 
+def remove_circleci():
+    """
+    Removes files needed for viper config utils
+    """
+    shutil.rmtree(os.path.join(
+        PROJECT_DIRECTORY, ".circleci"
+    ))
+
 if '{{ cookiecutter.enable_health_check }}'.lower() == 'n':
     remove_health_check()
+
+if '{{ cookiecutter.use_circleci }}'.lower() == 'n':
+    remove_circleci()
 
 # Run git as last
 if '{{ cookiecutter.use_git }}'.lower() == 'y':
