@@ -4,5 +4,9 @@
   "enable_sentry": "y",
   "enable_health_check": "n",
   "use_git": "y",
-  "use_circleci": "y"
+  "use_circleci": "y",
+  "use_gjira": "y",
+  "gjira_board_name": "board-name",
+  "gjira_issue_regex": "issue-id-regex",
+  "gjira_branch_regex": "^(feat|refactor|fix|chore)/.*$|^(master|dev(elop)?)$"
 }
