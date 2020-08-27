@@ -165,11 +165,13 @@ AUTH_USER_MODEL = "users.User"
 
 # Sentry
 
+{% if cookiecutter.enable_sentry == "y" %}
 if env.bool("ENABLE_SENTRY", False):
     import sentry_sdk
     from sentry_sdk.integrations.django import DjangoIntegration
 
     sentry_sdk.init(dsn=env("SENTRY_DSN"), integrations=[DjangoIntegration()])
+{% endif %}
 
 
 # VersatileImageField
