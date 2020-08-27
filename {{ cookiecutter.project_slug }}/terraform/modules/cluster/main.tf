@@ -27,7 +27,9 @@ module "backend" {
   lb_listener_http = aws_lb_listener.http_listener
   lb_listener_https = aws_lb_listener.https_listener
   task_definition_file = "${path.module}/task-definitions/backend.json"
+  {% if cookiecutter.enable_health_check %}
   health_check_path = "/health_check/"
+  {% endif %}
   # TODO: replace placeholder vars
   container_env_vars = {
     environment: var.environment,
