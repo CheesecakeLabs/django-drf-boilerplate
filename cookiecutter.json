@@ -3,4 +3,5 @@
   "project_title": "Django DRF Boilerplate",
   "enable_sentry": "y",
   "enable_health_check": "n",
+  "use_git": "y"
 }
