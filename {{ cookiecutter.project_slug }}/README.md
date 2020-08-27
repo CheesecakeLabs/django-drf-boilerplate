@@ -11,6 +11,13 @@ Currently supporting only Python 3.x.
 **IMPORTANT**:
 Docker Compose is used _just_ for development environment. The Dockerfile works without it.
 
+## Installing with cookiecutter
+Install and initialize with `cookiecutter`
+
+``` bash
+cookiecutter https://github.com/CheesecakeLabs/django-drf-boilerplate
+```
+
 ## How to install with Pyenv
 
 ```bash
