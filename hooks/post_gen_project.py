@@ -35,17 +35,11 @@ def init_git():
         git.wait()
 
 def remove_health_check():
-    """
-    Removes files needed for viper config utils
-    """
     os.remove(os.path.join(
         PROJECT_DIRECTORY, "src", "helpers", "health_check.py"
     ))
 
 def remove_circleci():
-    """
-    Removes files needed for viper config utils
-    """
     shutil.rmtree(os.path.join(
         PROJECT_DIRECTORY, ".circleci"
     ))
