@@ -1,4 +1,4 @@
-# Django DRF Boilerplate
+# {{ cookiecutter.project_title }}
 
 [![CircleCI](https://circleci.com/gh/CheesecakeLabs/django-drf-boilerplate.svg?style=svg)](https://circleci.com/gh/CheesecakeLabs/django-drf-boilerplate)
 [![Maintainability](https://api.codeclimate.com/v1/badges/4e7d4baaeb97d8590475/maintainability)](https://codeclimate.com/github/CheesecakeLabs/django-drf-boilerplate/maintainability)
