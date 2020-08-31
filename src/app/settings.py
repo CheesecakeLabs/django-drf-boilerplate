@@ -26,10 +26,10 @@ ENVIRONMENT = env("ENV")
 ALLOWED_HOSTS = env.list("DJANGO_ALLOWED_HOSTS", default=[])
 
 # CORS
-CORS_ORIGIN_ALLOW_ALL = env.bool("CORS_ORIGIN_ALLOW_ALL", default=False)
-if not CORS_ORIGIN_ALLOW_ALL:
-    CORS_ORIGIN_WHITELIST = env.str(
-        "CORS_ORIGIN_WHITELIST", default="localhost,127.0.0.1"
+CORS_ALLOW_ALL_ORIGINS = env.bool("CORS_ALLOW_ALL_ORIGINS", default=False)
+if not CORS_ALLOW_ALL_ORIGINS:
+    CORS_ALLOWED_ORIGINS = env.str(
+        "CORS_ALLOWED_ORIGINS", default="localhost,127.0.0.1"
     ).split(",")
 
 # Application definition
