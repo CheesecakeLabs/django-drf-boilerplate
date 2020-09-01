@@ -8,7 +8,7 @@ django-versatileimagefield==2.0
 
 # REST Framework
 djangorestframework==3.11.1
-django-cors-headers==3.4.0
+django-cors-headers==3.5.0
 
 # Database
 psycopg2-binary==2.8.5
