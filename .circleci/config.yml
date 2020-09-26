@@ -10,6 +10,8 @@ jobs:
     steps:
       - checkout
       - run: sudo pip install black cookiecutter
+      - run: git config --global user.email "admin@ckl.io"
+      - run: git config --global user.name "CircleCI"
       - run: cookiecutter . -o generated_boilerplate --no-input
       - run: black --fast generated_boilerplate/
       - store_artifacts:
@@ -80,7 +82,8 @@ jobs:
       - run:
           name: Upload coverage results to Code Climate
           command: |
-            (cd django_drf_boilerplate/; ../cc-test-reporter upload-coverage -i coverage.xml)
+            (cd django_drf_boilerplate/; ../cc-test-reporter format-coverage -t coverage.py -o codeclimate.json)
+            (cd django_drf_boilerplate/; ../cc-test-reporter upload-coverage -i codeclimate.json)
       - store_artifacts:
           path: django_drf_boilerplate/codeclimate.json
 
