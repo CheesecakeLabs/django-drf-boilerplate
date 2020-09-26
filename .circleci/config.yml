@@ -56,12 +56,14 @@ jobs:
             -f /tmp/workspace/generated_boilerplate/django_drf_boilerplate/docker-compose.test.yml up \
             --exit-code-from web
       - run: cp /tmp/workspace/generated_boilerplate/django_drf_boilerplate/coverage.xml .
+      - run: cp -rf /tmp/workspace/generated_boilerplate/django_drf_boilerplate/ .
       - store_artifacts:
           path: ./coverage.xml
       - persist_to_workspace:
           root: .
           paths:
             - ./coverage.xml
+            - ./django_drf_boilerplate
   analysis_codeclimate:
     docker:
       - image: circleci/python:3.8.0b1-stretch
@@ -73,14 +75,15 @@ jobs:
           command: |
             curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
             chmod +x ./cc-test-reporter
-      - run: cp /tmp/workspace/coverage.xml ./coverage.xml
+      - run: cp -rf /tmp/workspace/django_drf_boilerplate .
+      - run: cp /tmp/workspace/coverage.xml ./django_drf_boilerplate/coverage.xml
       - run:
           name: Upload coverage results to Code Climate
           command: |
-            ./cc-test-reporter format-coverage -t coverage.py -o codeclimate.json
-            ./cc-test-reporter upload-coverage -i codeclimate.json
+            (cd django_drf_boilerplate/; ../cc-test-reporter format-coverage -t coverage.py -o codeclimate.json)
+            (cd django_drf_boilerplate/; ../cc-test-reporter upload-coverage -i codeclimate.json)
       - store_artifacts:
-          path: codeclimate.json
+          path: django_drf_boilerplate/codeclimate.json
 
 workflows:
   version: 2
