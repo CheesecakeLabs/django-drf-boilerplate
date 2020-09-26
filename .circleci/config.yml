@@ -11,7 +11,7 @@ jobs:
       - checkout
       - run: sudo pip install black cookiecutter
       - run: cookiecutter . -o generated_boilerplate --no-input
-      - run: black generated_boilerplate/
+      - run: black --fast generated_boilerplate/
       - store_artifacts:
           path: generated_boilerplate/django_drf_boilerplate
   build:
