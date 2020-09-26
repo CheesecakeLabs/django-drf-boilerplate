@@ -1,8 +1,8 @@
 resource "aws_iam_role" "ecs-service-role" {
-  name = "${var.project_name}-ECS-Service-Role-${var.environment}"
+  name = "{{ cookiecutter.project_name }}-ECS-Service-Role-${var.environment}"
   assume_role_policy = data.aws_iam_policy_document.ecs-service-policy.json
   tags = {
-    "ckl:project" = var.project_name
+    "ckl:project" = {{ cookiecutter.project_name }}
     "ckl:alias" = "deploy-user"
   }
 }
@@ -24,7 +24,7 @@ data "aws_iam_policy_document" "ecs-service-policy" {
 }
 
 resource "aws_iam_role" "ecs-instance-role" {
-  name = "${var.project_name}-${var.environment}-ecs-instance-role"
+  name = "{{ cookiecutter.project_name }}-${var.environment}-ecs-instance-role"
   path = "/"
   assume_role_policy  = data.aws_iam_policy_document.ecs-instance-policy.json
 }
@@ -46,7 +46,7 @@ resource "aws_iam_role_policy_attachment" "ecs-instance-role-attachment" {
 }
 
 resource "aws_iam_instance_profile" "ecs-instance-profile" {
-  name = "${var.project_name}-${var.environment}-ecs-instance-profile"
+  name = "{{ cookiecutter.project_name }}-${var.environment}-ecs-instance-profile"
   path = "/"
   role = aws_iam_role.ecs-instance-role.id
 }
@@ -78,7 +78,7 @@ data "aws_iam_policy_document" "app_bucket_policy_document" {
 }
 
 resource "aws_iam_policy" "app_bucket_policy" {
-  name = "${var.project_name}-s3-policy-${var.environment}"
+  name = "{{ cookiecutter.project_name }}-s3-policy-${var.environment}"
   policy = data.aws_iam_policy_document.app_bucket_policy_document.json
 }
 

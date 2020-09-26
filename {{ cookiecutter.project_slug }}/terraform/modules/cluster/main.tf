@@ -1,9 +1,9 @@
 resource "aws_ecs_cluster" "cluster" {
-  name = "${var.project_name}-${var.environment}"
+  name = "{{ cookiecutter.project_name }}-${var.environment}"
 
   tags = {
     "ckl:environment" = var.environment
-    "ckl:project" = var.project_name
+    "ckl:project" = {{ cookiecutter.project_name }}
     "ckl:alias" = "cluster"
   }
 
@@ -14,7 +14,7 @@ module "backend" {
   source = "./service"
   region = var.region
   environment = var.environment
-  project_name = var.project_name
+  project_name = {{ cookiecutter.project_name }}
   vpc_id = var.vpc_id
   alias_name = "backend"
   cluster_id = aws_ecs_cluster.cluster.id
@@ -47,7 +47,7 @@ module "frontend" {
   source = "./service"
   region = var.region
   environment = var.environment
-  project_name = var.project_name
+  project_name = {{ cookiecutter.project_name }}
   vpc_id = var.vpc_id
   alias_name = "frontend"
   cluster_id = aws_ecs_cluster.cluster.id

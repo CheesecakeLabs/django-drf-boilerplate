@@ -1,5 +1,4 @@
 variable "region" {}
-variable "project_name" {}
 variable "environment" {}
 variable "vpc_id" {}
 variable "db_storage_size" {}

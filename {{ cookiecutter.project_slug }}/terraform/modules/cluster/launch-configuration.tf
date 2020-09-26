@@ -20,18 +20,18 @@ data "aws_ami" "ecs-optimized" {
 }
 
 resource "aws_key_pair" "ssh_access" {
-  key_name   = "${var.project_name}-${var.environment}-key"
+  key_name   = "{{ cookiecutter.project_name }}-${var.environment}-key"
   public_key = var.public_key
 
   tags = {
     "ckl:environment" = var.environment
-    "ckl:project" = var.project_name
+    "ckl:project" = {{ cookiecutter.project_name }}
     "ckl:alias" = "cluster"
   }
 }
 
 resource "aws_launch_configuration" "lc" {
-  name_prefix = "${var.project_name}-${var.environment}"
+  name_prefix = "{{ cookiecutter.project_name }}-${var.environment}"
   image_id = data.aws_ami.ecs-optimized.id
   instance_type = var.instance_type
   security_groups = [var.private_security_group_id]

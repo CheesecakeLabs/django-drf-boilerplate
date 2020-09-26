@@ -6,9 +6,9 @@ resource "aws_subnet" "private_subnet_1" {
   map_public_ip_on_launch = true
 
   tags = {
-    Name = "${var.project_name}-${var.environment}-private-subnet"
+    Name = "{{ cookiecutter.project_name }}-${var.environment}-private-subnet"
     "ckl:environment" = var.environment
-    "ckl:project" = var.project_name
+    "ckl:project" = {{ cookiecutter.project_name }}
     "ckl:alias" = "network"
   }
 }
@@ -20,9 +20,9 @@ resource "aws_subnet" "private_subnet_2" {
   map_public_ip_on_launch = true
 
   tags = {
-    Name = "${var.project_name}-${var.environment}-private-subnet-2"
+    Name = "{{ cookiecutter.project_name }}-${var.environment}-private-subnet-2"
     "ckl:environment" = var.environment
-    "ckl:project" = var.project_name
+    "ckl:project" = {{ cookiecutter.project_name }}
     "ckl:alias" = "network"
   }
 }
@@ -35,9 +35,9 @@ resource "aws_subnet" "public_subnet_1" {
   map_public_ip_on_launch = true
 
   tags = {
-    Name = "${var.project_name}-${var.environment}-public-subnet"
+    Name = "{{ cookiecutter.project_name }}-${var.environment}-public-subnet"
     "ckl:environment" = var.environment
-    "ckl:project" = var.project_name
+    "ckl:project" = {{ cookiecutter.project_name }}
     "ckl:alias" = "network"
   }
 }
@@ -49,9 +49,9 @@ resource "aws_subnet" "public_subnet_2" {
   map_public_ip_on_launch = true
 
   tags = {
-    Name = "${var.project_name}-${var.environment}--public-subnet-2"
+    Name = "{{ cookiecutter.project_name }}-${var.environment}--public-subnet-2"
     "ckl:environment" = var.environment
-    "ckl:project" = var.project_name
+    "ckl:project" = {{ cookiecutter.project_name }}
     "ckl:alias" = "network"
   }
 }

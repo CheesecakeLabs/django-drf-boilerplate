@@ -3,9 +3,9 @@ resource "aws_vpc" "vpc" {
   enable_dns_hostnames = "true"
 
   tags = {
-    Name = "${var.project_name}-${var.environment}-vpc"
+    Name = "{{ cookiecutter.project_name }}-${var.environment}-vpc"
     "ckl:environment" = var.environment
-    "ckl:project" = var.project_name
+    "ckl:project" = {{ cookiecutter.project_name }}
     "ckl:alias" = "network"
   }
 }

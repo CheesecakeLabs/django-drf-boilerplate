@@ -1,5 +1,5 @@
 resource "aws_security_group" "public_security_group" {
-  name = "${var.project_name}-${var.environment}-public"
+  name = "{{ cookiecutter.project_name }}-${var.environment}-public"
   description = "Public access from HTTP and HTTPS"
   vpc_id = aws_vpc.vpc.id
 
@@ -26,13 +26,13 @@ resource "aws_security_group" "public_security_group" {
 
   tags = {
     "ckl:environment" = var.environment
-    "ckl:project" = var.project_name
+    "ckl:project" = {{ cookiecutter.project_name }}
     "ckl:alias" = "network"
   }
 }
 
 resource "aws_security_group" "private_security_group" {
-  name = "${var.project_name}-${var.environment}-private"
+  name = "{{ cookiecutter.project_name }}-${var.environment}-private"
   description = "Private access allowed from public security group"
   vpc_id = aws_vpc.vpc.id
 
@@ -54,13 +54,13 @@ resource "aws_security_group" "private_security_group" {
 
   tags = {
     "ckl:environment" = var.environment
-    "ckl:project" = var.project_name
+    "ckl:project" = {{ cookiecutter.project_name }}
     "ckl:alias" = "network"
   }
 }
 
 resource "aws_security_group" "database_security_group" {
-  name = "${var.project_name}-${var.environment}-database"
+  name = "{{ cookiecutter.project_name }}-${var.environment}-database"
   description = "Private access allowed from private security group"
   vpc_id = aws_vpc.vpc.id
 
@@ -82,7 +82,7 @@ resource "aws_security_group" "database_security_group" {
 
   tags = {
     "ckl:environment" = var.environment
-    "ckl:project" = var.project_name
+    "ckl:project" = {{ cookiecutter.project_name }}
     "ckl:alias" = "network"
   }
 }

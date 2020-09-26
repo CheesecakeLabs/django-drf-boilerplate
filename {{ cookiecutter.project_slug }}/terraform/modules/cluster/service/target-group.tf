@@ -1,5 +1,5 @@
 resource "aws_lb_target_group" "tg" {
-  name  = "${var.project_name}-${var.alias_name}-${var.environment}"
+  name  = "{{ cookiecutter.project_name }}-${var.alias_name}-${var.environment}"
   port = 80
   protocol = "HTTP"
   vpc_id = var.vpc_id
@@ -10,7 +10,7 @@ resource "aws_lb_target_group" "tg" {
 
   tags = {
     "ckl:environment" = var.environment
-    "ckl:project" = var.project_name
+    "ckl:project" = {{ cookiecutter.project_name }}
     "ckl:alias" = "app"
   }
 }

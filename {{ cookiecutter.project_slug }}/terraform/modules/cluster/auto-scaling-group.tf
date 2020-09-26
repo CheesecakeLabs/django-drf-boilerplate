@@ -1,5 +1,5 @@
 resource "aws_autoscaling_group" "asg" {
-  name_prefix = "${var.project_name}-${var.environment}"
+  name_prefix = "{{ cookiecutter.project_name }}-${var.environment}"
   max_size = var.max_instances
   min_size = var.min_instances
   desired_capacity = var.desired_instances
@@ -10,13 +10,13 @@ resource "aws_autoscaling_group" "asg" {
   tag {
     key = "Name"
     propagate_at_launch = true
-    value = "${var.project_name}-${var.environment}-ECS-Instance"
+    value = "{{ cookiecutter.project_name }}-${var.environment}-ECS-Instance"
   }
 
   tag {
     key = "ckl:project"
     propagate_at_launch = true
-    value = var.project_name
+    value = {{ cookiecutter.project_name }}
   }
 
   tag {
@@ -28,6 +28,6 @@ resource "aws_autoscaling_group" "asg" {
   tag {
     key = "ckl:alias"
     propagate_at_launch = true
-    value = "${var.project_name}-${var.environment}-instance"
+    value = "{{ cookiecutter.project_name }}-${var.environment}-instance"
   }
 }

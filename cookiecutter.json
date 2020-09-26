@@ -1,5 +1,6 @@
 {
   "project_slug": "django_drf_boilerplate",
+  "project_name": "ckl_boilerplate",
   "project_title": "Django DRF Boilerplate",
   "enable_sentry": "y",
   "enable_health_check": "n",

@@ -1,5 +1,4 @@
 variable "environment" {}
-variable "project_name" {}
 variable "region" {}
 variable "ecr_list" {
   default = []

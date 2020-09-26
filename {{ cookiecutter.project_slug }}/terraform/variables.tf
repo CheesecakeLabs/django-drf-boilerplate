@@ -4,9 +4,6 @@ variable "region" {
 variable "aws_profile" {
   default = "staging"
 }
-variable "project_name" {
-  description = "Our project name"
-}
 variable "availability_zone_1" {
   default = "a"
 }

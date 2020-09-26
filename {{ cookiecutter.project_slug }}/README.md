@@ -12,21 +12,22 @@ Currently supporting only Python 3.x.
 Docker Compose is used _just_ for development environment. The Dockerfile works without it.
 
 ## Installing with cookiecutter
+
 Install and initialize with `cookiecutter`
 
-``` bash
+```bash
 cookiecutter https://github.com/CheesecakeLabs/django-drf-boilerplate
 ```
 
 ## How to install with Pyenv
 
 ```bash
-$ pyenv virtualenv 3.8.0 <project_name>
-$ pyenv activate <project_name>
+$ pyenv virtualenv 3.8.0 <{{ cookiecutter.project_name }}>
+$ pyenv activate <{{ cookiecutter.project_name }}>
 $ pip install Django==2.2.7
 $ django-admin.py startproject \
-  --template=https://github.com/CheesecakeLabs/django-drf-boilerplate/archive/master.zip \
-  <project_name> .
+    --template=https://github.com/CheesecakeLabs/django-drf-boilerplate/archive/master.zip \
+    <{{ cookiecutter.project_name }}> .
 $ pip install -r requirements/dev.txt
 $ python src/manage.py runserver
 ```
@@ -36,7 +37,7 @@ $ python src/manage.py runserver
 ```bash
 $ django-admin.py startproject \
   --template=https://github.com/CheesecakeLabs/django-drf-boilerplate/archive/master.zip \
-  <project_name> .
+  <{{ cookiecutter.project_name }}> .
 $ docker-compose up
 ```
 
@@ -114,13 +115,13 @@ don't forget to define these environment variables in your circleci project sett
 - `AWS_ACCESS_KEY_ID`
 - `AWS_SECRET_ACCESS_KEY`
 - `AWS_DEFAULT_REGION` (ex: `us-east-1`)
-- `AWS_RESOURCE_NAME_PREFIX` (ex: `${project_name}-backend`)
-- `AWS_SERVICE_NAME_LAB` (ex: `${project_name}-backend-lab`)
-- `AWS_SERVICE_NAME_STAGING` (ex: `${project_name}-backend-staging`)
-- `AWS_SERVICE_NAME_PROD` (ex: `${project_name}-backend-production`)
-- `AWS_CLUSTER_NAME_LAB` (ex: `${project_name}-lab`)
-- `AWS_CLUSTER_NAME_STAGING` (ex: `${project_name}-staging`)
-- `AWS_CLUSTER_NAME_PROD` (ex: `${project_name}-production`)
+- `AWS_RESOURCE_NAME_PREFIX` (ex: `{{ cookiecutter.project_name }}-backend`)
+- `AWS_SERVICE_NAME_LAB` (ex: `{{ cookiecutter.project_name }}-backend-lab`)
+- `AWS_SERVICE_NAME_STAGING` (ex: `{{ cookiecutter.project_name }}-backend-staging`)
+- `AWS_SERVICE_NAME_PROD` (ex: `{{ cookiecutter.project_name }}-backend-production`)
+- `AWS_CLUSTER_NAME_LAB` (ex: `{{ cookiecutter.project_name }}-lab`)
+- `AWS_CLUSTER_NAME_STAGING` (ex: `{{ cookiecutter.project_name }}-staging`)
+- `AWS_CLUSTER_NAME_PROD` (ex: `{{ cookiecutter.project_name }}-production`)
 - `CC_TEST_REPORTER_ID` ([from CodeClimate](https://docs.codeclimate.com/docs/finding-your-test-coverage-token))
 - `ENVIRONMENT` (ex: `development`)
 - `DJANGO_DEBUG` (ex: `True`)

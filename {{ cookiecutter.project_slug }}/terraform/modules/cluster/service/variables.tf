@@ -1,7 +1,6 @@
 variable "region" {}
 variable "vpc_id" {}
 variable "environment" {}
-variable "project_name" {}
 variable "domain" {}
 variable "alias_name" {}
 variable "cluster_id" {}

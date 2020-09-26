@@ -7,10 +7,10 @@ provider "aws" {
 terraform {
   backend "s3" {
     # Replace this with your Bucket name!
-    #bucket = "#####(replace) tfstate bucket name. ${var.project_name}-terraform-state#####"
+    #bucket = "#####(replace) tfstate bucket name. {{ cookiecutter.project_name }}-terraform-state#####"
     bucket = "ckltftest-terraform-state"
     # Replace this with your DynamoDB table name!
-    #dynamodb_table = "#####(replace) tflocks table name. ${var.project_name}-terraform-locks#####"
+    #dynamodb_table = "#####(replace) tflocks table name. {{ cookiecutter.project_name }}-terraform-locks#####"
     dynamodb_table = "ckltftest-terraform-locks"
     key = "terraform.tfstate"
     #region = "#####(replace) aws region. ie: us-west-2#####"
@@ -22,7 +22,7 @@ terraform {
 module "network" {
   source = "./modules/network"
   region = var.region
-  project_name = var.project_name
+  project_name = {{ cookiecutter.project_name }}
   environment = terraform.workspace
   availability_zone_1 = var.availability_zone_1
   availability_zone_2 = var.availability_zone_2
@@ -31,7 +31,7 @@ module "network" {
 module "iam" {
   source = "./modules/iam"
   region = var.region
-  project_name = var.project_name
+  project_name = {{ cookiecutter.project_name }}
   environment = terraform.workspace
   ecr_list = module.cluster.ecr_list
   app_bucket = module.files.app_bucket
@@ -40,7 +40,7 @@ module "iam" {
 module "database" {
   source = "./modules/database"
   region = var.region
-  project_name = var.project_name
+  project_name = {{ cookiecutter.project_name }}
   environment = terraform.workspace
   vpc_id = module.network.vpc_id
   security_group = module.network.database_security_group_id
@@ -55,14 +55,14 @@ module "database" {
 
 module "files" {
   source = "./modules/files"
-  project_name = var.project_name
+  project_name = {{ cookiecutter.project_name }}
   environment = terraform.workspace
 }
 
 module "cluster" {
   source = "./modules/cluster"
   region = var.region
-  project_name = var.project_name
+  project_name = {{ cookiecutter.project_name }}
   environment = terraform.workspace
   vpc_id = module.network.vpc_id
   ecs_instance_profile_id = module.iam.ecs-instance-profile.id

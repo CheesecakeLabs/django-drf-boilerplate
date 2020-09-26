@@ -1,7 +1,7 @@
 resource "aws_iam_user" "deploy-user" {
-  name = "${var.project_name}_deploy_user_${var.environment}"
+  name = "{{ cookiecutter.project_name }}_deploy_user_${var.environment}"
   tags = {
-    "ckl:project" = var.project_name
+    "ckl:project" = {{ cookiecutter.project_name }}
     "ckl:alias" = "app"
   }
 }
@@ -12,7 +12,7 @@ resource "aws_iam_user_policy_attachment" "policy-attachment" {
 }
 
 resource "aws_iam_policy" "deploy-policy" {
-  name = "${var.project_name}_deploy_policy_${var.environment}"
+  name = "{{ cookiecutter.project_name }}_deploy_policy_${var.environment}"
   policy = data.aws_iam_policy_document.ecs-deploy-policy.json
 }
 

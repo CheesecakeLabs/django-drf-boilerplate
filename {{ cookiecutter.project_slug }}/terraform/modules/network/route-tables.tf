@@ -3,9 +3,9 @@ resource "aws_internet_gateway" "igw" {
   vpc_id = aws_vpc.vpc.id
 
   tags = {
-    Name = "${var.project_name}-${var.environment}-internet-gateway"
+    Name = "{{ cookiecutter.project_name }}-${var.environment}-internet-gateway"
     "ckl:environment" = var.environment
-    "ckl:project" = var.project_name
+    "ckl:project" = {{ cookiecutter.project_name }}
     "ckl:alias" = "network"
   }
 }
@@ -20,9 +20,9 @@ resource "aws_route_table" "rt" {
   }
 
   tags = {
-    Name = "${var.project_name}-${var.environment}-igw-route-table"
+    Name = "{{ cookiecutter.project_name }}-${var.environment}-igw-route-table"
     "ckl:environment" = var.environment
-    "ckl:project" = var.project_name
+    "ckl:project" = {{ cookiecutter.project_name }}
     "ckl:alias" = "network"
   }
 }

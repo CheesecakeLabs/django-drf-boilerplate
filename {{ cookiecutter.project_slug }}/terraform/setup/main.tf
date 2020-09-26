@@ -4,7 +4,7 @@ provider "aws" {
 }
 
 resource "aws_s3_bucket" "terraform_state" {
-  bucket = "${var.project_name}-terraform-state"
+  bucket = "{{ cookiecutter.project_name }}-terraform-state"
 
   versioning {
     enabled = true
@@ -21,7 +21,7 @@ resource "aws_s3_bucket" "terraform_state" {
 }
 
 resource "aws_dynamodb_table" "terraform-locks" {
-  name = "${var.project_name}-terraform-locks"
+  name = "{{ cookiecutter.project_name }}-terraform-locks"
   hash_key = "LockID"
   billing_mode = "PAY_PER_REQUEST"
 
