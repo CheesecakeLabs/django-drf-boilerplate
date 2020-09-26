@@ -16,6 +16,10 @@ Docker Compose is used _just_ for development environment. The Dockerfile works 
 ```bash
 $ pyenv virtualenv 3.8.0 <{{ cookiecutter.project_name }}>
 $ pyenv activate <{{ cookiecutter.project_name }}>
+$ pip install Django==2.2.7
+$ django-admin.py startproject \
+    --template=https://github.com/CheesecakeLabs/django-drf-boilerplate/archive/master.zip \
+    <{{ cookiecutter.project_name }}> .
 $ pip install -r requirements/dev.txt
 $ python src/manage.py runserver
 ```
@@ -23,6 +27,9 @@ $ python src/manage.py runserver
 ## How to install with Docker Compose
 
 ```bash
+$ django-admin.py startproject \
+  --template=https://github.com/CheesecakeLabs/django-drf-boilerplate/archive/master.zip \
+  <{{ cookiecutter.project_name }}> .
 $ docker-compose up
 ```
 
@@ -82,7 +89,19 @@ Then configure the required regex for branch name in `.pre-commit-config`
 Follow those map of branchs and
 ![](https://i.ibb.co/82xhB1j/Django-Boilerplate-Pipeline-1.jpg)
 
-Add the following environment variables to your circleci project settings:
+update the image name at config.yaml and docker-compose.test.yaml
+
+```yaml
+references:
+  image_name: &image_name organization-name/project-name
+```
+
+```yaml
+web:
+  image: organization-name/project-name
+```
+
+don't forget to define these environment variables in your circleci project settings:
 
 - `AWS_ACCOUNT_ID`
 - `AWS_ACCESS_KEY_ID`
