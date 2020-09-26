@@ -80,8 +80,7 @@ jobs:
       - run:
           name: Upload coverage results to Code Climate
           command: |
-            (cd django_drf_boilerplate/; ../cc-test-reporter format-coverage -t coverage.py -o codeclimate.json)
-            (cd django_drf_boilerplate/; ../cc-test-reporter upload-coverage -i codeclimate.json)
+            (cd django_drf_boilerplate/; ../cc-test-reporter upload-coverage -i coverage.xml)
       - store_artifacts:
           path: django_drf_boilerplate/codeclimate.json
 
