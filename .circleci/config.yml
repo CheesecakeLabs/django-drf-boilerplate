@@ -12,6 +12,8 @@ jobs:
       - run: sudo pip install black cookiecutter
       - run: cookiecutter . -o generated_boilerplate --no-input
       - run: black generated_boilerplate/
+      - store_artifacts:
+          path: generated_boilerplate/django_drf_boilerplate
   build:
     machine:
       docker_layer_caching: true
@@ -44,7 +46,7 @@ jobs:
           command: docker load -i /tmp/workspace/image.tar
       - run: docker-compose -f generated_boilerplate/docker-compose.test.yml up --exit-code-from web
       - store_artifacts:
-          path: /generated_boilerplate/coverage.xml
+          path: generated_boilerplate/coverage.xml
       - persist_to_workspace:
           root: .
           paths:
