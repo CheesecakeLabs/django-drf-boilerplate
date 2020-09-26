@@ -25,7 +25,6 @@ jobs:
     environment:
       IMAGE_NAME: *image_name
     steps:
-      - checkout
       - attach_workspace:
           at: /tmp/workspace
       - run:
@@ -47,7 +46,6 @@ jobs:
     environment:
       IMAGE_NAME: *image_name
     steps:
-      - checkout
       - attach_workspace:
           at: /tmp/workspace
       - run:
@@ -68,9 +66,9 @@ jobs:
     docker:
       - image: circleci/python:3.8.0b1-stretch
     steps:
-      - checkout
       - attach_workspace:
           at: /tmp/workspace
+      - checkout
       - run:
           command: |
             curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
@@ -89,7 +87,6 @@ jobs:
     environment:
       IMAGE_NAME: *image_name
     steps:
-      - checkout
       - attach_workspace:
           at: /tmp/workspace
       - setup_remote_docker
@@ -103,7 +100,6 @@ jobs:
     docker:
       - image: circleci/python:3.8.0b1-stretch
     steps:
-      - checkout
       - run:
           name: Installing awscli
           command: |
