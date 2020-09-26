@@ -53,13 +53,17 @@ jobs:
       - run:
           name: Load archived Docker image
           command: docker load -i /tmp/workspace/image.tar
-      - run: docker-compose -f generated_boilerplate/docker-compose.test.yml up --exit-code-from web
+      - run: |
+          docker-compose \
+            -f /tmp/workspace/generated_boilerplate/django_drf_boilerplate/docker-compose.test.yml up \
+            --exit-code-from web
+      - run: cp /tmp/workspace/generated_boilerplate/django_drf_boilerplate/coverage.xml .
       - store_artifacts:
-          path: generated_boilerplate/coverage.xml
+          path: ./coverage.xml
       - persist_to_workspace:
           root: .
           paths:
-            - ./generated_boilerplate/coverage.xml
+            - ./coverage.xml
   analysis_codeclimate:
     docker:
       - image: circleci/python:3.8.0b1-stretch
