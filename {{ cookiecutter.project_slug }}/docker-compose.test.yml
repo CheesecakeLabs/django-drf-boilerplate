@@ -1,7 +1,7 @@
 version: "3"
 services:
   web:
-    image: organization-name/project-name # IMAGE_NAME value from circleci
+    image: {{ cookiecutter.organization_name }}/{{ cookiecutter.project_name }}
     volumes:
       - .:/usr/src/app
     environment:

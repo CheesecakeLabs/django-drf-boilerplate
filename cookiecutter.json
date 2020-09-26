@@ -2,6 +2,7 @@
   "project_slug": "django_drf_boilerplate",
   "project_name": "ckl_boilerplate",
   "project_title": "Django DRF Boilerplate",
+  "organization_name":  "your-org-name",
   "enable_sentry": "y",
   "enable_health_check": "n",
   "use_git": "y",
