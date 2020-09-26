@@ -13,7 +13,7 @@ jobs:
       - run: git config --global user.email "admin@ckl.io"
       - run: git config --global user.name "CircleCI"
       - run: cookiecutter . -o generated_boilerplate --no-input
-      - run: black --fast generated_boilerplate/
+      - run: black --check generated_boilerplate/
       - store_artifacts:
           path: generated_boilerplate/django_drf_boilerplate
       - persist_to_workspace:
