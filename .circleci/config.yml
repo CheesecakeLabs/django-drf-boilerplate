@@ -1,7 +1,7 @@
 version: 2
 
 references:
-  image_name: &image_name cheesecakelabs/django_drf_boilerplate
+  image_name: &image_name organization-name/project-name
 
 jobs:
   python_linter:
