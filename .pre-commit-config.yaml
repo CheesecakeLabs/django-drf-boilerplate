@@ -1,0 +1,14 @@
+repos:
+-   repo: https://github.com/ambv/black
+    rev: 20.8b1
+    hooks:
+       - id: black
+         language_version: python
+
+-   repo: https://github.com/benmezger/gjira
+    rev: master
+    hooks:
+      - id: gjira
+        args: ["--board={board-name}", '--regex={issue-id}', "--template=.github/COMMIT_TEMPLATE"]
+      - id: gjira-check-branch
+        args: ["--regex=^(feat|refactor|fix|chore)/.*$|^(master|dev(elop)?)$"]

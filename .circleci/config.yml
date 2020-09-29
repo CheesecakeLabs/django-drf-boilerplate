@@ -9,7 +9,7 @@ jobs:
       - image: circleci/python:3.8.0b1-stretch
     steps:
       - checkout
-      - run: sudo pip install black cookiecutter
+      - run: sudo pip install black==20.8b1 cookiecutter
       - run: git config --global user.email "admin@ckl.io"
       - run: git config --global user.name "CircleCI"
       - run: cookiecutter . -o generated_boilerplate --no-input
