@@ -27,6 +27,7 @@ case $1 in
         AWS_CLUSTER_NAME=${AWS_CLUSTER_NAME_PROD}
         AWS_RESOURCE_NAME="${AWS_RESOURCE_NAME_PREFIX}/production"
         TAG=${CIRCLE_TAG}
+        docker pull ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${AWS_RESOURCE_NAME}:latest
         docker tag ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${AWS_RESOURCE_NAME}:latest ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${AWS_RESOURCE_NAME}:${CIRCLE_TAG}
         docker push ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${AWS_RESOURCE_NAME}:${CIRCLE_TAG}
     ;;
