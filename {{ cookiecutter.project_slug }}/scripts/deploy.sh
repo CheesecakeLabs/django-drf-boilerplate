@@ -6,6 +6,14 @@ SERVICE_NAME=""
 AWS_CLUSTER_NAME=""
 AWS_RESOURCE_NAME=""
 TAG=""
+
+# validate if $1 variable exists if not, it means it is a tagged build, without circle branch variable
+# (+x) parameter expansion
+if [ -z ${1+x} ]
+then
+    set -- "production"
+fi
+
 case $1 in
     "lab")
         echo "deploying to LAB"
