@@ -92,7 +92,7 @@ jobs:
           name: Installing awscli
           command: |
             sudo apt-get install jq
-            sudo pip install --upgrade setuptools awscli awsebcli
+            sudo pip install --upgrade setuptools awscli awsebcli --use-feature=2020-resolver
             curl https://raw.githubusercontent.com/silinternational/ecs-deploy/master/ecs-deploy | sudo tee /usr/bin/ecs-deploy
             sudo chmod +x /usr/bin/ecs-deploy
       - run: eval $(aws ecr get-login --region ${AWS_DEFAULT_REGION} | sed 's|https://||' | sed 's|-e none ||')
