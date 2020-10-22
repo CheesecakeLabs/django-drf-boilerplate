@@ -136,14 +136,14 @@ STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 # Media files (uploads)
 
-if DEBUG:
+if ENVIRONMENT in ("development", "testing"):
     DEFAULT_FILE_STORAGE = "django.core.files.storage.FileSystemStorage"
     MEDIA_ROOT = "uploads/"
     MEDIA_URL = "/uploads/"
 
 # Email settings
 
-if DEBUG:
+if ENVIRONMENT in ("development", "testing"):
     EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
     DEFAULT_FROM_EMAIL = "no-reply@localhost"
 
