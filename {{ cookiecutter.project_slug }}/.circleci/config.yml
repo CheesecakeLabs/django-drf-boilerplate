@@ -88,6 +88,7 @@ jobs:
       - image: circleci/python:3.8.0b1-stretch
     steps:
       - checkout
+      - setup_remote_docker
       - run:
           name: Installing awscli
           command: |
