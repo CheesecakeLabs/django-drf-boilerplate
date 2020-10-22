@@ -6,6 +6,14 @@ SERVICE_NAME=""
 AWS_CLUSTER_NAME=""
 AWS_RESOURCE_NAME=""
 TAG=""
+
+# validate if $1 variable exists if not, it means it is a tagged build, without circle branch variable
+# (+x) parameter expansion
+if [ -z ${1+x} ]
+then
+    set -- "production"
+fi
+
 case $1 in
     "lab")
         echo "deploying to LAB"
@@ -27,6 +35,7 @@ case $1 in
         AWS_CLUSTER_NAME=${AWS_CLUSTER_NAME_PROD}
         AWS_RESOURCE_NAME="${AWS_RESOURCE_NAME_PREFIX}/production"
         TAG=${CIRCLE_TAG}
+        docker pull ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${AWS_RESOURCE_NAME}:latest
         docker tag ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${AWS_RESOURCE_NAME}:latest ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${AWS_RESOURCE_NAME}:${CIRCLE_TAG}
         docker push ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${AWS_RESOURCE_NAME}:${CIRCLE_TAG}
     ;;
