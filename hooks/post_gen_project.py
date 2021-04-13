@@ -38,6 +38,11 @@ def remove_health_check():
     os.remove(os.path.join(
         PROJECT_DIRECTORY, "src", "helpers", "health_check.py"
     ))
+    os.remove(
+        os.path.join(
+            PROJECT_DIRECTORY, "src", "app", "tests", "test_health_check_middleware.py"
+        )
+    )
 
 def remove_circleci():
     shutil.rmtree(os.path.join(
